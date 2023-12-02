@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% block tittle %}
+<title>Thêm mới sản phẩm | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %}
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<style>
+    .inputProduct {
+        width: 25%;
+    }
+</style>
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="page-header-title">Thêm mới sản phẩm</h1>
+            </div>
+            <!-- End Col -->
+
+
+            <!-- End Col -->
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Page Header -->
+
+    <div class="row">
+        <form action="{% url  'manage_add_product' %}" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="text" style="display: None;" id="inputUser" name="user" value="{{ request.user.id }}">
+
+            <!-- Form Product -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+
+                    <!-- Body -->
+                    <div class="card-body">
+
+                        <!-- Form Sản phẩm-->
+                        <div class="row mb-4">
+                            <label for="inputProduct" class="col-sm-3 col-form-label form-label">Sản phẩm <span class="form-label-secondary">*</span></label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="product" id="inputProduct"
+                                    placeholder="Sản phẩm" aria-label="Sản phẩm" 
+                                    autocomplete="off" required>
+                            </div>
+                        </div>
+                        <!-- End Form Sản phẩm-->
+
+                        <!-- Form Giá-->
+                        <div class="row mb-4">
+                            <label for="inputPrice" class="col-sm-3 col-form-label form-label">Giá <span class="form-label-secondary">*</span></label>
+
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" name="price" id="inputPrice" placeholder="Giá" aria-label="Giá"  autocomplete="off" required>
+                            </div>
+                        </div>
+                        <!-- End Form Giá-->
+
+                        <!-- Form Công dụng -->
+                        <div class="row mb-4">
+                          <label for="inputFunction" class="col-sm-3 col-form-label form-label">Công dụng<span class="form-label-secondary">*</span></label>
+                          <div class="col-sm-9">
+                            <div class="input-group input-group-sm-vertical">
+                              <input type="text" class="form-control" name="function" id="inputFunction" placeholder="Công dụng" aria-label="Công dụng" required>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Form Công dụng -->
+
+                        <!-- Form Tần suất sử dụng-->
+                        <div class="row mb-4">
+                          <label for="inputDosage" class="col-sm-3 col-form-label form-label">Tần suất sử dụng<span class="form-label-secondary">*</span></label>
+
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" name="dosage" id="inputDosage" onKeyPress="if(this.value.length==1024) return false;" placeholder="Tần suất sử dụng" aria-label="Tần suất sử dụng" required>
+                          </div>
+                        </div>
+                        <!-- End Form Tần suất sử dụng-->
+
+                        <!-- Form Từ khóa Routine-->
+                        <div class="row mb-4">
+                          <label for="inputKeyword" class="col-sm-3 col-form-label form-label">Từ khóa Routine<span class="form-label-secondary">*</span></label>
+
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" name="keyword" id="inputKeyword" onKeyPress="if(this.value.length==1024) return false;" placeholder="Từ khóa Routine" aria-label="Từ khóa Routine" required>
+                          </div>
+                        </div>
+                        <!-- End Form Từ khóa Routine-->
+
+                        <!-- Form Ước lượng sử dụng-->
+                        <div class="row mb-4">
+                          <label for="inputEstimate" class="col-sm-3 col-form-label form-label">Ước lượng sử dụng<span class="form-label-secondary">*</span></label>
+
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" name="estimate" id="inputEstimate" onKeyPress="if(this.value.length==1024) return false;" placeholder="Ước lượng sử dụng" aria-label="Ước lượng sử dụng" required>
+                          </div>
+                        </div>
+                        <!-- End Form Ước lượng sử dụng-->
+
+                        <!-- Form Lưu ý-->
+                        <div class="row mb-4">
+                          <label for="inputNote" class="col-sm-3 col-form-label form-label">Lưu ý<span class="form-label-secondary">*</span></label>
+
+                          <div class="col-sm-9">
+                            <div class="input-group input-group-sm-vertical">
+                              <!-- <input type="text" class="js-masked-input form-control" name="note" id="inputNote"  placeholder="Lưu ý" aria-label="Lưu ý" required> -->
+                              <textarea class="form-control" name="note" id="inputNote"  placeholder="Lưu ý" aria-label="Lưu ý" required rows="5"></textarea>
+
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Form Email-->
+
+                        <!-- Form Hình ảnh sản phẩm-->
+                        <div class="row mb-4">
+                          <label for="FormFileProduct" class="col-sm-3 col-form-label form-label">Hình ảnh sản phẩm <span class="form-label-secondary">*</span></label>
+
+                          <div class="col-sm-9">
+                            <div class="input-group input-group-sm-vertical">                    
+                              <label for="FormFileProduct" class="js-file-attach form-label"
+                                              data-hs-file-attach-options='{
+                                              "textTarget": "[for=\"customFile\"]"
+                                                  }'></label>
+                              <input class="form-control" type="file" name="images_product[]" accept=".png, .jpg, .jpeg, .svg" id="FormFileProduct" multiple>
+                              
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Form Hình ảnh sản phẩm-->
+
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Product -->
+
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">Lưu</button>
+            </div>
+        </form>
+        {% comment %} Display Messages {% endcomment %} 
+          {% if messages.tags == "error" %}
+            <hr>
+              {% for mess in messages %}
+              <div class="alert alert-soft-danger fade show" role="alert">
+                  <span class="fw-semi-bold">{{ mess  }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+
+          {% endif %}
+          
+    </div>
+    <!-- End Row -->
+
+</div>
+<!-- End Row -->
+
+<!-- <script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script> -->
+
+
+{% endblock content %}
+
+{% block js_custom %}
+
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+
+
+      // INITIALIZATION OF CLIPBOARD
+      // =======================================================
+      HSCore.components.HSClipboard.init('.js-clipboard')
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+</script>
+
+<!-- End Style Switcher JS -->
+{% endblock js_custom %}

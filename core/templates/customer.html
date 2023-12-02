@@ -1,0 +1,1470 @@
+{% extends 'base.html' %}
+{% block tittle %}
+  <title>Khách hàng | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %} 
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-header-title">Khách hàng</h1>
+      </div>
+      <!-- End Col -->
+
+      <div class="col-auto">
+        <a class="button-8 btn-primary" id="btn-add" href="javascript:;" data-bs-toggle="modal" data-bs-target="#AddCustomer">
+          <i class="bi-person-plus-fill me-1"></i>
+        </a>
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Page Header -->
+
+
+  <!-- Card -->
+  <div class="card mb-3 mb-lg-5">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="row justify-content-between align-items-center flex-grow-1">
+        <div class="col-md">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-header-title">Khách hàng</h4>
+
+           
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          <!-- Filter -->
+          <div class="row align-items-sm-center">
+            <div class="col-sm-auto">
+              <div class="row align-items-center gx-0">
+                <div class="col">
+                  <span class="text-secondary me-2">Tình trạng:</span>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-auto">
+                  <!-- Select -->
+                  <div class="tom-select-custom tom-select-custom-end">
+                    <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" data-target-column-index="2" data-target-table="datatable" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "dropdownWidth": "10rem"
+                            }'>
+                      <option value="null" selected>Tất cả</option>
+
+                      <!-- <option value="1">Chưa dùng</option> -->
+                      {% for status in list_status %}
+                          <option value="{{ status.id }}">{{ status.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            <!-- End Col -->
+
+            <div class="col-sm-auto">
+              <div class="row align-items-center gx-0">
+                <div class="col">
+                  <span class="text-secondary me-2">Loại:</span>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-auto">
+                  <!-- Select -->
+                  <div class="tom-select-custom tom-select-custom-end">
+                    <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" data-target-column-index="5" data-target-table="datatable" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "dropdownWidth": "10rem"
+                            }'>
+                      <option value="null" selected>Tất cả</option>
+                      {% for type in list_type %}
+                          <option value="{{ type.id }}">{{ type.name }}</option>
+                        {% endfor %}
+                      <!-- <option value="1 year ago">1 year ago</option>
+                      <option value="6 months ago">6 months ago</option> -->
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            <!-- End Col -->
+
+            <div class="col-md">
+              <form>
+                <!-- Search -->
+                <div class="input-group input-group-merge input-group-flush">
+                  <div class="input-group-prepend input-group-text">
+                    <i class="bi-search"></i>
+                  </div>
+                  <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Tìm kiếm...">
+                </div>
+                <!-- End Search -->
+              </form>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Filter -->
+        </div>
+        <!-- End Col -->
+        <div class="col-auto">
+          <!-- Dropdown -->
+          <div class="dropdown">
+            <button class="btn btn-ghost-secondary" type="button" id="dropdownMenuButtonGhostPrimary" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-table"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonGhostPrimary">
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Tên khách hàng</label>
+                <input type="checkbox" id="toggleColumn_customer" class="form-check-input" checked>
+              </div>
+               <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">User</label>
+                <input type="checkbox" id="toggleColumn_user" class="form-check-input" checked>
+              </div> 
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">SĐT</label>
+                <input type="checkbox" id="toggleColumn_phone" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Email</label>
+                <input type="checkbox" id="toggleColumn_email" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Địa chỉ</label>
+                <input type="checkbox" id="toggleColumn_address" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Tuổi</label>
+                <input type="checkbox" id="toggleColumn_age" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Tình trạng</label>
+                <input type="checkbox" id="toggleColumn_status" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Nhóm KH</label>
+                <input type="checkbox" id="toggleColumn_group" class="form-check-input" checked>
+              </div>
+              <div class="d-flex align-items-center justify-content-between form-check form-switch form-switch-between mb-3">
+                <label class="form-check-label">Ghi chú</label>
+                <input type="checkbox" id="toggleColumn_note" class="form-check-input" checked>
+              </div>
+
+            </div>
+          </div>
+        <!-- End Dropdown -->
+        </div>
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Header -->
+
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+      <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+               "columnDefs": [{
+                  "targets": [10],
+                  "orderable": false
+                }],
+               "order": [],
+               "info": {
+                 "totalQty": "#datatableWithPaginationInfoTotalQty"
+               },
+               "search": "#datatableSearch",
+               "entries": "#datatableEntries",
+               "pageLength": 8,
+               "isResponsive": false,
+               "isShowPaging": false,
+               "pagination": "datatablePagination"
+             }'>
+        <thead class="thead-light">
+          <tr>
+            <th>STT</th>
+            <th>Tên khách hàng</th>
+            <th class="hidden-col">User</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th>Tuổi</th>
+            <th>Tình trạng KH</th>
+            <th>Nhóm KH</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for c in list_customer %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+          
+            <td class="table-column-ps-0">
+              <a class="d-flex align-items-center" href="/customer/order/{{ c.id }}">
+                
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="text-inherit mb-0">{{ c.full_name }} <i class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title=""></i> </h5>
+                </div>
+              </a>
+            </td>
+            <td class="hidden-col">{{ c.user.username }} </td>
+            <td>{{ c.numberphone }}</td>
+            <td>{% if c.email != None %} {{ c.email }} {% endif %}</td>
+            <td>{% if c.address != None %} {{ c.address }} {% endif %}</td>
+            <td>{% if c.age != None %} {{ c.age }} {% endif %}</td>
+            <td>
+              {% if c.status != None %} {{ c.status }} {% endif %}
+            </td>
+            <td>{% if c.type != None %} {{ c.type }} {% endif %}</td>
+
+            <td>
+              <textarea class="form-control" id="validationInvalidTextarea1" rows="2" style="width: 120px;" readonly>{% if c.note != None %} {{ c.note }} {% endif %}</textarea>
+            </td>
+
+            <td>
+             
+              <a class="button-8 btn-edit-customer" href="javascript:;" data-bs-toggle="modal" data-bs-target="#EditCustomer" data-id-customer="{{ c.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <a class="button-8 btn-delete-customer" href="javascript:;" title="Xóa" data-bs-toggle="modal"  data-bs-target="#DeleteCustomer" delete-id-customer="{{ c.id }}">
+                <i class="bi bi-trash"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          
+
+          
+        </tbody>
+      </table>
+    </div>
+    <!-- End Table -->
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <!-- Pagination -->
+      <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+        <div class="col-sm mb-2 mb-sm-0">
+          <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+            <span class="me-2">Hiển thị:</span>
+
+            <!-- Select -->
+            <div class="tom-select-custom">
+              <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
+                        "searchInDropdown": false,
+                        "hideSearch": true
+                      }'>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8" selected>8</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <!-- End Select -->
+            <span class="text-secondary me-2">của</span>
+
+            <!-- Pagination Quantity -->
+            <span id="datatableWithPaginationInfoTotalQty"></span>
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm-auto">
+          <div class="d-flex justify-content-center justify-content-sm-end">
+            <!-- Pagination -->
+            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+          </div>
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End Card -->
+
+
+</div>
+
+
+<!-- Add Customer -->
+<div class="modal fade" id="AddCustomer" tabindex="-1" aria-labelledby="AddCustomerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddCustommerLabel">Thêm mới khách hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <div class="js-nav-scroller hs-nav-scroller-horizontal">
+          <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-left"></i>
+            </a>
+          </span>
+
+          <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-right"></i>
+            </a>
+          </span>
+
+          
+        </div>
+        <!-- End Nav Scroller -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="AddCustommerTabContent">
+          
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form>
+
+              <input type="text" style="display: None;" id="inputUser" name="user" value="{{ request.user.id }}">
+
+              <!-- Form Tên khách hàng-->
+              <div class="row mb-4">
+                <label for="inputFullname" class="col-sm-3 col-form-label form-label">Tên khách hàng <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" name="full_name" id="inputFullname" placeholder="Tên khách hàng" aria-label="Tên khách hàng">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Tên khách hàng-->
+
+              <!-- Form SĐT-->
+              <div class="row mb-4">
+                <label for="inputPhone" class="col-sm-3 col-form-label form-label">SĐT <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="number" class="js-masked-input form-control" name="numberphone" id="inputPhone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;"  placeholder="SĐT" aria-label="SĐT" >
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form SĐT-->
+
+              <!-- Form Email-->
+              <div class="row mb-4">
+                <label for="inputEmail" class="col-sm-3 col-form-label form-label">Email</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="email" class="js-masked-input form-control" name="email" id="inputEmail"  placeholder="Email" aria-label="Email" >
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Email-->
+
+              <!-- Form Tuổi-->
+              <div class="row mb-4">
+                <label for="inputAge" class="col-sm-3 col-form-label form-label">Tuổi</label>
+
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" name="age" id="inputAge" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;"  placeholder="Tuổi" aria-label="Tuổi">
+                </div>
+              </div>
+              <!-- End Form Tuổi-->
+
+              <!-- Form Địa chỉ-->
+              <div class="row mb-4">
+                <label for="inputAddress" class="col-sm-3 col-form-label form-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="address" id="inputAddress" placeholder="Địa chỉ" aria-label="Địa chỉ">
+                </div>
+              </div>
+              <!-- End Form Địa chỉ-->
+              
+              <!-- Form Nghề nghiệp-->
+              <div class="row mb-4">
+                <label for="inputProfession" class="col-sm-3 col-form-label form-label">Nghề nghiệp</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="profession" id="inputProfession" placeholder="Nghề nghiệp" aria-label="Nghề nghiệp">
+                </div>
+              </div>
+              <!-- End Form Nghề nghiệp-->
+              
+              <!-- Form Loại Tình trạng-->
+              <div class="row mb-4">
+                <label for="inputStatus" class="col-sm-3 col-form-label form-label">Tình trạng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                    <div class="tom-select-custom">
+                      <select class="js-select form-select" id="inputStatus" name="status" autocomplete="off"
+                              data-hs-tom-select-options='{
+                                "placeholder": "Chọn..."
+                                
+                              }'>
+                        
+                        <option value="">Chọn...</option>
+                        {% for status in list_status %}
+                          <option value="{{ status.id }}">{{ status.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Tình trạng-->
+
+              <!-- Form Nhóm khách hàng-->
+              <div class="row mb-4">
+                <label for="inputType" class="col-sm-3 col-form-label form-label">Nhóm khách hàng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                  <div class="tom-select-custom">
+                    <select class="js-select form-select" 
+                            data-hs-tom-select-options='{
+                              "placeholder": "Chọn..."
+                              
+                            }' id="inputType" name="type" autocomplete="off">
+                      <option value="">Chọn...</option>
+                      {% for type in list_type %}
+                          <option value="{{ type.id }}">{{ type.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Nhóm khách hàng-->
+
+              <!-- Form Ghi chú-->
+              <div class="row mb-4">
+                <label for="inputNote" class="col-sm-3 col-form-label form-label">Ghi chú</label>
+
+                <div class="col-sm-9">
+                  <!-- <input type="text" class="form-control" name="note" id="inputNote" placeholder="Ghi chú" aria-label="Ghi chú"> -->
+                  <textarea class="form-control" name="note" id="inputNote" placeholder="Ghi chú" aria-label="Ghi chú" rows="5"></textarea>
+                </div>
+              </div>
+              <!-- End Form Ghi chú-->
+
+              <div class="alert alert-danger" role="alert" id="ShowMessage" style="display: None;">
+                
+              </div>
+
+              <div class="alert alert-success" role="alert" id="ShowMessageSuccess" style="display: None;">
+                
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <div class="d-flex gap-3">
+                  <button type="button" class="button-8 btn-white" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                  <button type="button" class="button-8 btn-add-customer">Lưu</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Add Customer -->
+
+
+<!-- Edit Customer -->
+<div class="modal fade" id="EditCustomer" tabindex="-1" aria-labelledby="EditCustomer" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditCustomerLabel">Chỉnh sửa khách hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <div class="js-nav-scroller hs-nav-scroller-horizontal">
+          <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-left"></i>
+            </a>
+          </span>
+
+          <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-right"></i>
+            </a>
+          </span>
+
+          
+        </div>
+        <!-- End Nav Scroller -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="EditCustomerForm">
+
+              <input type="text" style="display: None;" id="inputEditId" value="">
+
+              <!-- Form Tên khách hàng-->
+              <div class="row mb-4">
+                <label for="inputEditFullname" class="col-sm-3 col-form-label form-label">Tên khách hàng <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" name="full_name" id="inputEditFullname" placeholder="Tên khách hàng" aria-label="Tên khách hàng">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Tên khách hàng-->
+
+              
+              <!-- Form SĐT-->
+              <div class="row mb-4">
+                <label for="inputEditPhone" class="col-sm-3 col-form-label form-label">SĐT<span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="number" class="js-masked-input form-control" name="numberphone" id="inputEditPhone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;"  placeholder="SĐT" aria-label="SĐT" >
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form SĐT-->
+
+              <!-- Form Email-->
+              <div class="row mb-4">
+                <label for="inputEditEmail" class="col-sm-3 col-form-label form-label">Email</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="email" class="js-masked-input form-control" name="email" id="inputEditEmail"  placeholder="Email" aria-label="Email" >
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Email-->
+
+              <!-- Form Tuổi-->
+              <div class="row mb-4">
+                <label for="inputEditAge" class="col-sm-3 col-form-label form-label">Tuổi</label>
+
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" name="age" id="inputEditAge" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;"  placeholder="Tuổi" aria-label="Tuổi">
+                </div>
+              </div>
+              <!-- End Form Tuổi-->
+
+              <!-- Form Địa chỉ-->
+              <div class="row mb-4">
+                <label for="inputEditAddress" class="col-sm-3 col-form-label form-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="address" id="inputEditAddress" placeholder="Địa chỉ" aria-label="Địa chỉ">
+                </div>
+              </div>
+              <!-- End Form Địa chỉ-->
+              
+              <!-- Form Nghề nghiệp-->
+              <div class="row mb-4">
+                <label for="inputEditProession" class="col-sm-3 col-form-label form-label">Nghề nghiệp</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="profession" id="inputEditProession" placeholder="Nghề nghiệp" aria-label="Nghề nghiệp">
+                </div>
+              </div>
+              <!-- End Form Nghề nghiệp-->
+              
+              <!-- Form Loại Tình trạng-->
+              <div class="row mb-4">
+                <label for="inputEditStatus" class="col-sm-3 col-form-label form-label">Tình trạng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                    <div class="tom-select-custom">
+                      <select class="js-select form-select" id="inputEditStatus" name="status" autocomplete="off"
+                              data-hs-tom-select-options='{
+                                "placeholder": "Chọn...",
+                                "minimumResultsForSearch": "Infinity",
+                              }'>
+                        
+                        <option value="">Chọn...</option>
+                        {% for status in list_status %}
+                          <option value="{{ status.id }}">{{ status.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Tình trạng-->
+
+              <!-- Form Nhóm khách hàng-->
+              <div class="row mb-4">
+                <label for="inputEditType" class="col-sm-3 col-form-label form-label">Nhóm khách hàng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                  <div class="tom-select-custom">
+                    <select class="js-select form-select"
+                            data-hs-tom-select-options='{
+                              "placeholder": "Chọn...",
+                              "minimumResultsForSearch": "Infinity",
+                            }' id="inputEditType" name="type" autocomplete="off">
+                      <option value="">Chọn...</option>
+                      {% for type in list_type %}
+                          <option value="{{ type.id }}">{{ type.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Nhóm khách hàng-->
+
+              <!-- Form Ghi chú-->
+              <div class="row mb-4">
+                <label for="inputEditNote" class="col-sm-3 col-form-label form-label">Ghi chú</label>
+
+                <div class="col-sm-9">
+                  <!-- <input type="text" style="display: none;"  class="form-control" name="note" id="inputEditNote" placeholder="Ghi chú" aria-label="Ghi chú"> -->
+                  <textarea class="form-control"  name="note" id="inputEditNote" placeholder="Ghi chú" aria-label="Ghi chú" rows="5"></textarea>
+
+                </div>
+              </div>
+              <!-- End Form Ghi chú-->
+
+
+              <div class="alert alert-danger" role="alert" id="ShowEditMessage" style="display: None;">
+                
+              </div>
+
+              <div class="alert alert-success" role="alert" id="ShowEditMessageSuccess" style="display: None;">
+                
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <div class="d-flex gap-3">
+                  <button type="button" class="button-8 btn-white" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                  <button type="button" class="button-8 btn-update-customer">Lưu</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Edit Customer -->
+
+
+<!-- Delete Customer -->
+<div class="modal fade" id="DeleteCustomer" tabindex="-1" aria-labelledby="DeleteCustomerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeleteCustomerLabel">Xóa khách hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <div class="js-nav-scroller hs-nav-scroller-horizontal">
+          <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-left"></i>
+            </a>
+          </span>
+
+          <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-right"></i>
+            </a>
+          </span>
+
+          
+        </div>
+        <!-- End Nav Scroller -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="DeleteCustomerForm">
+
+              <input type="text" style="display: None;" id="inputDeleteId" value="">
+
+              <!-- Form Tên khách hàng-->
+              <div class="row mb-4">
+                <label for="inputDeleteFullname" class="col-sm-3 col-form-label form-label">Tên khách hàng <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" id="inputDeleteFullname" placeholder="Tên khách hàng" aria-label="Tên khách hàng" readonly disabled>
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Tên khách hàng-->
+
+              <!-- Form SĐT-->
+              <div class="row mb-4">
+                <label for="inputDeletePhone" class="col-sm-3 col-form-label form-label">SĐT<span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="number" class="js-masked-input form-control" name="numberphone" id="inputDeletePhone" placeholder="SĐT" aria-label="SĐT" readonly disabled>
+              
+                  </div>
+                </div>
+              </div>
+              <!-- End Form SĐT-->
+
+              <!-- Form Email-->
+              <div class="row mb-4">
+                <label for="inputDeleteEmail" class="col-sm-3 col-form-label form-label">Email</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="email" class="js-masked-input form-control" id="inputDeleteEmail" placeholder="Email" aria-label="Email" readonly disabled>
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Email-->
+
+              <!-- Form Tuổi-->
+              <div class="row mb-4">
+                <label for="inputDeleteAge" class="col-sm-3 col-form-label form-label">Tuổi</label>
+
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="inputDeleteAge" placeholder="Tuổi" aria-label="Tuổi" readonly disabled>
+                </div>
+              </div>
+              <!-- End Form Tuổi-->
+
+              <!-- Form Địa chỉ-->
+              <div class="row mb-4">
+                <label for="inputDeleteAddress" class="col-sm-3 col-form-label form-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputDeleteAddress" placeholder="Địa chỉ" aria-label="Địa chỉ" readonly disabled>
+                </div>
+              </div>
+              <!-- End Form Địa chỉ-->
+              
+              <!-- Form Nghề nghiệp-->
+              <div class="row mb-4">
+                <label for="inputDeleteProession" class="col-sm-3 col-form-label form-label">Nghề nghiệp</label>
+
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputDeleteProession" placeholder="Nghề nghiệp" aria-label="Nghề nghiệp" readonly disabled>
+                </div>
+              </div>
+              <!-- End Form Nghề nghiệp-->
+              
+              <!-- Form Loại Tình trạng-->
+              <div class="row mb-4">
+                <label for="inputDeleteStatus" class="col-sm-3 col-form-label form-label">Tình trạng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                    <div class="tom-select-custom">
+                      <select class="js-select form-select" id="inputDeleteStatus" autocomplete="off"
+                              data-hs-tom-select-options='{
+                                "placeholder": "Chọn...",
+                                "minimumResultsForSearch": "Infinity",
+                              }' readonly disabled>
+                        
+                        <option value="">Chọn...</option>
+                        {% for status in list_status %}
+                          <option value="{{ status.id }}">{{ status.name }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Tình trạng-->
+
+              <!-- Form Nhóm khách hàng-->
+              <div class="row mb-4">
+                <label for="inputDeleteType" class="col-sm-3 col-form-label form-label">Nhóm khách hàng</label>
+
+                <div class="col-sm-9">
+                  <!-- Select -->
+                  <div class="tom-select-custom">
+                    <select class="js-select form-select"
+                            data-hs-tom-select-options='{
+                              "placeholder": "Chọn...",
+                              "minimumResultsForSearch": "Infinity",
+                            }' id="inputDeleteType" autocomplete="off" readonly disabled>
+                      <option value="">Chọn...</option>
+                      {% for type in list_type %}
+                          <option value="{{ type.id }}">{{ type.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+              </div>
+              <!-- End Form Nhóm khách hàng-->
+
+              <!-- Form Ghi chú-->
+              <div class="row mb-4">
+                <label for="inputDeleteNote" class="col-sm-3 col-form-label form-label">Ghi chú</label>
+
+                <div class="col-sm-9">
+                  <!-- <input type="text" style="display: none;" class="form-control" name="note" id="inputDeleteNote" placeholder="Ghi chú" aria-label="Ghi chú" readonly disabled> -->
+                  <textarea class="form-control"  name="note" id="inputDeleteNote" placeholder="Ghi chú" aria-label="Ghi chú" rows="5" readonly disabled></textarea>
+
+                </div>
+              </div>
+              <!-- End Form Ghi chú-->
+
+
+              <div class="alert alert-danger" role="alert" id="ShowDeleteMessage" style="display: None;">
+                
+              </div>
+
+              <div class="alert alert-success" role="alert" id="ShowDeleteMessageSuccess" style="display: None;">
+                
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <div class="d-flex gap-3">
+                  <button type="button" class="button-8 btn-white" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                  <button type="button" class="button-8 btn-get-delete-customer">Xóa</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Delete Customer -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // save User
+    $(document).on('click', '.btn-add-customer', function(event) {
+      event.preventDefault();
+      var fullname = document.getElementById("inputFullname").value;
+      var numberphone = document.getElementById("inputPhone").value;
+
+      if ( fullname.replace(/\s/g, '') == "" || numberphone .replace(/\s/g, '') == "" ){
+
+        document.getElementById("ShowMessage").style.display = "block";
+        document.getElementById("ShowMessage").innerHTML = "Vui lòng điền vào ô bắt buộc!";
+        return false;
+      }
+      // document.getElementById("btnAddUser").disabled = true;
+      // make POST ajax call
+      $.ajax({
+        type: 'POST',
+        url: "manage/customer",
+        // contentType: 'application/json; charset=utf-8',
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'user': $('#inputUser').val(),
+          'full_name': $('#inputFullname').val(),
+          'numberphone': $('#inputPhone').val(),
+          'email': $('#inputEmail').val(),
+          'age': $('#inputAge').val(),
+          'address':  $('#inputAddress').val(),
+          'profession':  $('#inputProfession').val(),
+          'status': $('#inputStatus').val(),
+          'type': $('#inputType').val(),
+          'note':$('#inputNote').val(),
+
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          // console.log(data);
+          if (data['type'] == 'success') {
+            $('#EditCustomerForm').trigger('reset');
+            $('#inputStatus').val('').trigger('change');
+            $('#inputType').val('').trigger('change');
+            document.getElementById("ShowMessage").style.display = "none";
+
+            document.getElementById("ShowMessageSuccess").style.display = "block";
+            document.getElementById("ShowMessageSuccess").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          // alert the error if any error occured
+          document.getElementById("ShowEditMessage").style.display = "block";
+          document.getElementById("ShowEditMessage").innerHTML = data['message'];
+        }
+      })
+    
+    })
+
+    // get data customer
+    $(document).on('click', '.btn-edit-customer', function(event) {
+      var get_id = (this.getAttribute('data-id-customer'));
+      // console.log(get_id);
+
+      $.ajax({
+        type: 'GET',
+        url: "manage/update/customer/"+get_id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': get_id
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          // console.log(data['data_customer']);
+          if (data['type'] == 'success') {
+            $('#EditCustomerForm').trigger('reset');
+            document.getElementById("inputEditId").value = get_id;
+            document.getElementById("inputEditFullname").value = data['data_customer']['full_name'];
+            document.getElementById("inputEditPhone").value = data['data_customer']['numberphone']; 
+            document.getElementById("inputEditEmail").value = data['data_customer']['email']; 
+            document.getElementById("inputEditAge").value = data['data_customer']['address']; 
+            document.getElementById("inputEditAddress").value = data['data_customer']['age']; 
+            document.getElementById("inputEditProession").value = data['data_customer']['profession']; 
+            document.getElementById("inputEditNote").value = data['data_customer']['note']; 
+
+            // BUG nè
+            // document.getElementById("inputEditStatus").selectedIndex = 0;
+            document.getElementById("inputEditStatus").value = data['data_customer']['id_status']; 
+
+            // document.getElementById("inputEditType").selectedIndex = 0;
+            document.getElementById("inputEditType").value = data['data_customer']['id_type']; 
+
+
+            
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowUpdateMessage").style.display = "block";
+          document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      
+      })
+    
+    });
+
+    // post update customer
+    $(document).on('click', '.btn-update-customer', function(event) {
+      var id = document.getElementById("inputEditId").value;
+      // console.log(id);
+      
+      $.ajax({
+        type: 'POST',
+        url: "manage/update/customer/"+id,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'full_name': $('#inputEditFullname').val(),
+          'numberphone':  $('#inputEditPhone').val(),
+          'email':  $('#inputEditEmail').val(),
+          'age':  $('#inputEditAge').val(),
+          'profession':  $('#inputEditProession').val(),
+          'address':  $('#inputEditAddress').val(),
+          'status':  $('#inputEditStatus').val(),
+          'type':  $('#inputEditType').val(),
+          'note': $('#inputEditNote').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            // $('#EditCustomerForm').trigger('reset');
+            document.getElementById("ShowEditMessage").style.display = "None";
+
+            document.getElementById("ShowEditMessageSuccess").style.display = "block";
+            document.getElementById("ShowEditMessageSuccess").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowEditMessage").style.display = "block";
+            document.getElementById("ShowEditMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          document.getElementById("ShowEditMessage").style.display = "block";
+          document.getElementById("ShowEditMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+
+    // get id delete
+    $(document).on('click', '.btn-delete-customer', function(event) {
+      var get_id = (this.getAttribute('delete-id-customer'));
+      // console.log(get_id);
+
+      $.ajax({
+        type: 'GET',
+        url: "manage/delete/customer/"+get_id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': get_id
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          // console.log(data['data_customer']);
+          if (data['type'] == 'success') {
+            $('#DeleteCustomerForm').trigger('reset');
+            document.getElementById("inputDeleteId").value = get_id;
+            document.getElementById("inputDeleteFullname").value = data['data_customer']['full_name'];
+            document.getElementById("inputDeletePhone").value = data['data_customer']['numberphone']; 
+            document.getElementById("inputDeleteEmail").value = data['data_customer']['email']; 
+            document.getElementById("inputDeleteAge").value = data['data_customer']['address']; 
+            document.getElementById("inputDeleteAddress").value = data['data_customer']['age']; 
+            document.getElementById("inputDeleteProession").value = data['data_customer']['profession'];
+            document.getElementById("inputDeleteNote").value = data['data_customer']['note'];
+            // BUG nè
+            // document.getElementById("inputEditStatus").selectedIndex = 0;
+            document.getElementById("inputDeleteStatus").value = data['data_customer']['id_status']; 
+
+            // document.getElementById("inputEditType").selectedIndex = 0;
+            document.getElementById("inputDeleteType").value = data['data_customer']['id_type']; 
+
+
+            
+
+          } else {
+            document.getElementById("ShowDeleteMessage").style.display = "block";
+            document.getElementById("ShowDeleteMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowDeleteMessage").style.display = "block";
+          document.getElementById("ShowDeleteMessage").innerHTML = data['message'];
+        }
+      
+      })
+    
+    });
+
+    // delete id Customer delete
+    $(document).on('click', '.btn-get-delete-customer', function(event) {
+      var id_delete = document.getElementById("inputDeleteId").value;
+      // console.log(id_delete);
+
+      // document.getElementById("content-name-organization").innerHTML = $('.nameorganization').val();
+      // document.getElementById("content-code-organization").innerHTML = "abc";
+
+      $.ajax({
+        type: 'POST',
+        url: "manage/delete/customer/"+id_delete,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': id_delete,
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            // document.getElementById("ShowUpdateMessage").style.display = "block";
+            // document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+            alert(data['message'])
+            window.location.reload();
+
+          } else {
+            alert(data['message'])
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          alert(data['message'])
+          // document.getElementById("ShowUpdateMessage").style.display = "block";
+          // document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+</script>
+
+
+{% endblock content %}
+
+{% block js_custom %}
+
+<!-- JS Plugins Init. -->
+<script>
+  $(document).on('ready', function () {
+    // INITIALIZATION OF DATERANGEPICKER
+    // =======================================================
+    $('.js-daterangepicker').daterangepicker();
+
+    $('.js-daterangepicker-times').daterangepicker({
+      timePicker: true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour'),
+      locale: {
+        format: 'M/DD hh:mm A'
+      }
+    });
+
+    var start = moment();
+    var end = moment();
+
+    function cb(start, end) {
+      $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
+    }
+
+    $('#js-daterangepicker-predefined').daterangepicker({
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+
+    cb(start, end);
+  });
+
+
+  // INITIALIZATION OF DATATABLES
+  // =======================================================
+  HSCore.components.HSDatatables.init($('#datatable'), {
+    select: {
+      style: 'multi',
+      selector: 'td:first-child input[type="checkbox"]',
+      classMap: {
+        checkAll: '#datatableCheckAll',
+        counter: '#datatableCounter',
+        counterInfo: '#datatableCounterInfo'
+      }
+    },
+    language: {
+      zeroRecords: `<div class="text-center p-4">
+            <img class="mb-3" src="{% static 'assets/svg/illustrations/oc-error.svg' %}" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+            <img class="mb-3" src="{% static 'assets/svg/illustrations-light/oc-error.svg' %}" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+          <p class="mb-0">Không có dữ liệu</p>
+          </div>`
+    }
+  });
+
+  const datatable = HSCore.components.HSDatatables.getItem(0)
+
+  document.querySelectorAll('.js-datatable-filter').forEach(function (item) {
+    item.addEventListener('change',function(e) {
+      const elVal = e.target.value,
+  targetColumnIndex = e.target.getAttribute('data-target-column-index'),
+  targetTable = e.target.getAttribute('data-target-table');
+
+  HSCore.components.HSDatatables.getItem(targetTable).column(targetColumnIndex).search(elVal !== 'null' ? elVal : '').draw()
+    })
+  })
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  });
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      Chart.plugins.unregister(ChartDataLabels);
+      HSCore.components.HSChartJS.init('.js-chart')
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      HSCore.components.HSChartJS.init('#updatingBarChart')
+      const updatingBarChart = HSCore.components.HSChartJS.getItem('updatingBarChart')
+
+      // Call when tab is clicked
+      document.querySelectorAll('[data-bs-toggle="chart-bar"]').forEach(item => {
+        item.addEventListener('click', e => {
+          let keyDataset = e.currentTarget.getAttribute('data-datasets')
+
+          const styles = HSCore.components.HSChartJS.getTheme('updatingBarChart', HSThemeAppearance.getAppearance())
+
+          if (keyDataset === 'lastWeek') {
+            updatingBarChart.data.labels = ["Apr 22", "Apr 23", "Apr 24", "Apr 25", "Apr 26", "Apr 27", "Apr 28", "Apr 29", "Apr 30", "Apr 31"];
+            updatingBarChart.data.datasets = [
+              {
+                "data": [120, 250, 300, 200, 300, 290, 350, 100, 125, 320],
+                "backgroundColor": styles.data.datasets[0].backgroundColor,
+                "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
+                "borderColor": styles.data.datasets[0].borderColor
+              },
+              {
+                "data": [250, 130, 322, 144, 129, 300, 260, 120, 260, 245, 110],
+                "backgroundColor": styles.data.datasets[1].backgroundColor,
+                "borderColor": styles.data.datasets[1].borderColor
+              }
+            ];
+            updatingBarChart.update();
+          } else {
+            updatingBarChart.data.labels = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
+            updatingBarChart.data.datasets = [
+              {
+                "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
+                "backgroundColor": styles.data.datasets[0].backgroundColor,
+                "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
+                "borderColor": styles.data.datasets[0].borderColor
+              },
+              {
+                "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
+                "backgroundColor": styles.data.datasets[1].backgroundColor,
+                "borderColor": styles.data.datasets[1].borderColor
+              }
+            ]
+            updatingBarChart.update();
+          }
+        })
+      })
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      HSCore.components.HSChartJS.init('.js-chart-datalabels', {
+        plugins: [ChartDataLabels],
+        options: {
+          plugins: {
+            datalabels: {
+              anchor: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? 'end' : 'center';
+              },
+              align: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? 'end' : 'center';
+              },
+              color: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
+              },
+              font: function (context) {
+                var value = context.dataset.data[context.dataIndex],
+                  fontSize = 25;
+
+                if (value.r > 50) {
+                  fontSize = 35;
+                }
+
+                if (value.r > 70) {
+                  fontSize = 55;
+                }
+
+                return {
+                  weight: 'lighter',
+                  size: fontSize
+                };
+              },
+              offset: 2,
+              padding: 0
+            }
+          }
+        }
+      })
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+
+
+      // INITIALIZATION OF CLIPBOARD
+      // =======================================================
+      HSCore.components.HSClipboard.init('.js-clipboard')
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+  </script>
+
+<!-- End Style Switcher JS -->
+
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+    const datatableSortingColumn = HSCore.components.HSDatatables.getItem('datatable')
+    document.getElementById('toggleColumn_customer').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(1).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_user').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(2).visible(e.target.checked)
+    }) 
+    
+    document.getElementById('toggleColumn_phone').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(3).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_email').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(4).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_address').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(5).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_age').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(6).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_status').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(7).visible(e.target.checked)
+    })
+    document.getElementById('toggleColumn_group').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(8).visible(e.target.checked)
+    })
+
+    document.getElementById('toggleColumn_note').addEventListener('change', function (e) {
+      datatableSortingColumn.columns(9).visible(e.target.checked)
+    })
+  })()
+</script>
+{% endblock js_custom %}

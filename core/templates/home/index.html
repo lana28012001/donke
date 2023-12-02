@@ -1,0 +1,438 @@
+
+
+{% extends 'base.html' %}
+{% block tittle %}
+  <title> Home | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %} 
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-header-title">Trang chủ</h1>
+      </div>
+      
+      <!-- End Col -->
+
+      <!-- <div class="col-auto">
+        <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#inviteUserModal">
+          <i class="bi-person-plus-fill me-1"></i> Thêm mới
+        </a>
+      </div> -->
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Page Header -->
+
+  <!-- Stats -->
+  <div class="row">
+    <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+      <!-- Card -->
+      <a class="card card-hover-shadow h-100" href="http://127.0.0.1:8000/manage/customer">
+        <div class="card-body">
+          <i class="bi-people nav-icon"></i>
+
+          <h6 class="card-subtitle">Khách hàng</h6>
+
+          <div class="row align-items-center gx-2 mb-1">
+            <div class="col-6">
+              <h2 class="card-title text-inherit">{{ count_customer }}</h2>
+            </div>
+            <!-- End Col -->
+
+            
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          
+        </div>
+      </a>
+      <!-- End Card -->
+    </div>
+
+    <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+      <!-- Card -->
+      <a class="card card-hover-shadow h-100" href="http://127.0.0.1:8000/manage/order">
+        <div class="card-body">
+          <i class="bi-receipt nav-icon"></i>
+          <h6 class="card-subtitle">Đơn kê</h6>
+
+          <div class="row align-items-center gx-2 mb-1">
+            <div class="col-6">
+              <h2 class="card-title text-inherit">{{ count_order }}</h2>
+            </div>
+            <!-- End Col -->
+
+            
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          
+        </div>
+      </a>
+      <!-- End Card -->
+    </div>
+
+    {% if user.is_superuser %}
+
+    <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+      <!-- Card -->
+      <a class="card card-hover-shadow h-100" href="http://127.0.0.1:8000/manage/product">
+        <div class="card-body">
+          <i class="bi-box-seam nav-icon"></i>
+          <h6 class="card-subtitle">Sản phẩm</h6>
+
+          <div class="row align-items-center gx-2 mb-1">
+            <div class="col-6">
+              <h2 class="card-title text-inherit">{{ count_product }}</h2>
+            </div>
+            <!-- End Col -->
+
+            
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          
+        </div>
+      </a>
+      <!-- End Card -->
+    </div>
+
+    <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+      <!-- Card -->
+      <a class="card card-hover-shadow h-100" href="http://127.0.0.1:8000/manage/service">
+        <div class="card-body">
+          <i class="bi-briefcase nav-icon"></i>
+          <h6 class="card-subtitle">Dịch vụ</h6>
+
+          <div class="row align-items-center gx-2 mb-1">
+            <div class="col-6">
+              <h2 class="card-title text-inherit">{{ count_service }}</h2>
+            </div>
+            <!-- End Col -->
+
+            
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          
+        </div>
+      </a>
+      <!-- End Card -->
+    </div>
+    {% endif %}
+
+  </div>
+  <!-- End Stats -->
+  <div class="row">
+
+    <div class="col-lg-12 mb-lg-0">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Header -->
+        <div class="content-between">
+
+          <!-- Dropdown -->
+          <div class="dropdown" style="display: none;">
+            <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="reportsOverviewDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-three-dots-vertical"></i>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="reportsOverviewDropdown1" style="display: none;">
+              <span class="dropdown-header">Settings</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-share-fill dropdown-item-icon"></i> Share reports
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-download dropdown-item-icon"></i> Download
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-alt dropdown-item-icon"></i> Connect other apps
+              </a>
+
+              <div class="dropdown-divider"></div>
+
+              <span class="dropdown-header">Feedback</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-chat-left-dots dropdown-item-icon"></i> Report
+              </a>
+            </div>
+          </div>
+          <!-- End Dropdown -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        
+        
+        
+
+      <div class="card-body" style="max-width: 100%;">
+          <!-- Progress -->
+          <div class="progress rounded-pill mb-2" style="display: none;">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="top" title="Gross value"></div>
+            <div class="progress-bar opacity-50" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="top" title="Net volume from sales"></div>
+            <div class="progress-bar opacity-25" role="progressbar" style="width: 9%" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip" data-bs-placement="top" title="New volume from sales"></div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-4" style="display: none;" >
+            <span style="display: none;">0%</span>
+            <span style="display: none;">100%</span>
+          </div>
+          <!-- End Progress -->
+
+          <!-- Table -->
+          {% comment %} <div class="table-responsive" style="display: none;">
+            <table class="table table-lg table-nowrap card-table mb-0">
+              <tr>
+                <th scope="row">
+                  <span class="legend-indicator bg-primary"></span>Gross value
+                </th>
+                <td>$3,500.71</td>
+                <td>
+                  <span class="badge bg-soft-success text-success">+12.1%</span>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  <span class="legend-indicator bg-primary opacity-50"></span>Net volume from sales
+                </th>
+                <td>$2,980.45</td>
+                <td>
+                  <span class="badge bg-soft-warning text-warning">+6.9%</span>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  <span class="legend-indicator bg-primary opacity-25"></span>New volume from sales
+                </th>
+                <td>$950.00</td>
+                <td>
+                  <span class="badge bg-soft-danger text-danger">-1.5%</span>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  <span class="legend-indicator"></span>Other
+                </th>
+                <td>32</td>
+                <td>
+                  <span class="badge bg-soft-success text-success">1.9%</span>
+                </td>
+              </tr>
+            </table>
+          </div> {% endcomment %}
+      
+          <div class="slideshow-container">
+            <!-- Slides -->
+            <div class="mySlides">
+              <img src="{% static 'assets\img\bg\pexels-andrzej-gdula-11149809 (1).jpg' %}" alt="Slide 1">
+            </div>
+          
+            <div class="mySlides">
+              <img src="{% static 'assets\img\bg\anh2.jpg' %}" alt="Slide 2">
+            </div>
+          
+            <div class="mySlides">
+              <img src="{% static 'assets\img\bg\anh3.jpg' %}" alt="Slide 3">
+            </div>
+  
+            <div class="mySlides">
+              <img src="{% static 'assets\img\bg\pexels-ivan-samkov-5659057 (1).jpg' %}" alt="Slide 4">
+            </div>
+          
+            <!-- Navigation dots -->
+            <div style="text-align:center">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+         {% comment %} <div class="slideshow-container">
+          <!-- Slides -->
+          <div class="mySlides">
+            <img src="{% static 'assets\img\bg\pexels-andrzej-gdula-11149809 (1).jpg' %}" alt="Slide 1">
+          </div>
+        
+          <div class="mySlides">
+            <img src="{% static 'assets\img\bg\anh2.jpg' %}" alt="Slide 2">
+          </div>
+        
+          <div class="mySlides">
+            <img src="{% static 'assets\img\bg\anh3.jpg' %}" alt="Slide 3">
+          </div>
+
+          <div class="mySlides">
+            <img src="{% static 'assets\img\bg\pexels-ivan-samkov-5659057 (1).jpg' %}" alt="Slide 4">
+          </div>
+        
+          <!-- Navigation dots -->
+          <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+         {% endcomment %}
+          {% comment %} <div class="text-center" style="margin: 0;text-align: center;">
+            <img class="img-fluid" src="{% static 'assets\img\bg\bia.png' %}" alt="Image Description" style="width: 50rem;" data-hs-theme-appearance="default">
+            <img class="img-fluid" src="{% static 'assets\img\bg\bia.png' %}" alt="Image Description" style="width: 50rem;" data-hs-theme-appearance="dark">
+          </div>    {% endcomment %}
+        <!-- End Body -->
+      </div> 
+      <!-- End Card -->
+    </div>
+
+  </div>
+
+
+
+
+</div>
+
+{% endblock content %}
+
+{% block js_custom %}
+
+
+
+<!-- JS Plugins Init. -->
+
+
+<script>
+  (function() {
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  });
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+  </script>
+
+  <script>
+    let slideIndex = 0;
+    showSlides();
+  
+    function showSlides() {
+      let i;
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 2000); // Change slide every 2 seconds
+    }
+  </script>
+
+<!-- End Style Switcher JS -->
+{% endblock js_custom %}

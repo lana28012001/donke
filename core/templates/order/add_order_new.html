@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% block tittle %}
+  <title>Thêm mới đơn kê | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %} 
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-header-title">Thêm mới đơn kê</h1>
+      </div>
+      <!-- End Col -->
+
+      
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Page Header -->
+
+
+  <!-- Card KH-->
+  <div class="card mb-3 mb-lg-5">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="row justify-content-between align-items-center flex-grow-1">
+        <div class="col-md">
+          <!-- Form Tên khách hàng-->
+          <div class="row mb-4">
+            <label for="inputFullname" class="col-sm-3 col-form-label form-label">Tên khách hàng <span class="form-label-secondary">*</span></label>
+
+            <div class="col-sm-9">
+              <!-- Select -->
+            <div class="tom-select-custom">
+                <select class="js-select form-select" autocomplete="off"
+                        data-hs-tom-select-options='{
+                        "searchInDropdown": false,
+                        "hidePlaceholderOnSearch": true,
+                        "placeholder": "Chọn..."
+                        }'>
+                <option value="">Chọn...</option>
+                {% for customer in list_customer %}
+
+                <option value="{{ customer.id }}">{{ customer.full_name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <!-- End Select -->
+            </div>
+          </div>
+          <!-- End Form Tên khách hàng-->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Header -->
+  </div>
+  <!-- End KH -->
+  
+    
+
+  <!-- Card Product-->
+  <div class="card mb-3 mb-lg-5">
+    <div class="card-header card-header-content-sm-between">
+        <h4 class="card-header-title mb-2 mb-sm-0">Chi tiết thuốc</h4>
+        <p>
+            <input class="button-8" id="btnProduct" type="button" value="Thêm hàng">
+        </p>
+        
+    </div>
+
+
+        <thead class="thead-light">
+          <tr>
+            <th>STT</th>
+            <th>Ngày</th>
+            <th>Tên sản phẩm</th>
+            <th>Buổi</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td> <input type="number"  pattern="/^-?\d+\.?\d*$/"  onpaste="return false;" autocomplete="off" required> </td>
+            <td> <input type="text" onpaste="return false;" autocomplete="off" name="day" required> </td>
+            <td> 
+                <!-- Select -->
+                <div class="tom-select-custom">
+                    <select class="js-select form-select" name="product" autocomplete="off"
+                            data-hs-tom-select-options='{
+                            "placeholder": "Chọn..."
+                            }'>
+                    <option value="">Chọn...</option>
+
+                    {% for po in list_product %}
+                    <option value="{{ po.id }}">{{ po.product }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <!-- End Select -->
+                
+            </td>
+            <td> <input type="text" name="session" onpaste="return false;" autocomplete="off" required>  </td>
+            
+            <td> <input class="button-8" type="button" value="Xóa hàng"> </td>
+            
+          </tr>
+          
+
+          
+        </tbody>
+
+        
+
+        
+      </table>
+      
+    </div>
+    <!-- End Table -->
+
+  
+  </div>
+  <!-- End Card Product-->
+
+  <!-- Card Service-->
+  <div class="card mb-3 mb-lg-5">
+    <div class="card-header card-header-content-sm-between">
+        <h4 class="card-header-title mb-2 mb-sm-0">Chi tiết dịch vụ</h4>
+        <p>
+            <input class="button-8" id="btnService" type="button" value="Thêm hàng">
+        </p>
+        
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+      <table id="datatableService" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+              "columnDefs": [{
+                  "targets": [3],
+                  "orderable": false
+                }],
+              "order": [],
+              "info": {
+                "totalQty": "#datatableWithPaginationInfoTotalQty"
+              },
+              "search": "#datatableSearch",
+              "entries": "#datatableEntries",
+              "pageLength": 8,
+              "isResponsive": false,
+              "isShowPaging": false,
+              "pagination": "datatablePagination"
+            }'>
+        <thead class="thead-light">
+          <tr>
+            <th>Tên dịch vụ</th>
+            <th>Thời gian</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td> 
+                <!-- Select -->
+                <div class="tom-select-custom">
+                    <select class="js-select form-select" name="service" autocomplete="off"
+                            data-hs-tom-select-options='{
+                            "placeholder": "Chọn..."
+                            }'>
+                    <option value="">Chọn...</option>
+
+                    {% for se in list_service %}
+                    <option value="{{ se.id }}">{{ se.service }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <!-- End Select -->
+                
+            </td>
+            <td> <input type="text" name="time" onpaste="return false;" autocomplete="off" required>  </td>
+
+            <td> <input type="text" name="note" onpaste="return false;" autocomplete="off" required>  </td>
+            
+            <td> <input class="button-8" type="button" value="Xóa hàng"> </td>
+            
+          </tr>
+          
+
+          
+        </tbody>
+
+        
+
+        
+      </table>
+      
+    </div>
+    <!-- End Table -->
+
+  
+  </div>
+  <!-- End Card Service-->
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    // add/delete row đơn thuoc
+    $('#datatable').on('click', 'input[type="button"]', function() {
+        $(this).closest('tr').remove();
+    })
+    $('#btnProduct').click(function() {
+        var countRow = $('#datatable tr').length;
+
+        $('#datatable').append('<tr>  <td> <input type="number"  pattern="/^-?\d+\.?\d*$/"  onpaste="return false;" autocomplete="off" required> </td>  <td> <input type="text" onpaste="return false;" autocomplete="off" name="day" required> </td>  <td>  <div class="tom-select-custom">  <select class="js-select form-select" name="product" autocomplete="off" data-hs-tom-select-options="{  "placeholder": "Chọn..."   }"> <option value="">Chọn...</option>   {% for po in list_product %}   <option value="{{ po.id }}">{{ po.product }}</option>   {% endfor %}   </select>   </div>    </td>   <td> <input type="text" name="session" onpaste="return false;" autocomplete="off" required>  </td> <td> <input class="button-8" type="button" value="Xóa hàng"> </td>  </tr>')
+        
+    });
+    (function() {
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+    });
+
+    // // Add delete row service
+    $('#datatableService').on('click', 'input[type="button"]', function() {
+        $(this).closest('tr').remove();
+    })
+    $('#btnService').click(function() {
+        var countRow = $('#datatableService tr').length;
+
+        $('#datatableService').append(' <tr>  <td>  <div class="tom-select-custom"> <select class="js-select form-select" name="service" autocomplete="off" >  <option value="">Chọn...</option>  {% for se in list_service %} <option value="{{ se.id }}">{{ se.service }}</option> {% endfor %}  </select> </div> </td> <td> <input type="text" name="time" onpaste="return false;" autocomplete="off" required>  </td> <td> <input type="text" name="note" onpaste="return false;" autocomplete="off" required>  </td> <td> <input class="button-8" type="button" value="Xóa hàng"> </td>  </tr>  ')
+        
+    });
+
+
+</script>
+
+
+
+{% endblock content %}

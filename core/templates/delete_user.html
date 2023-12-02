@@ -1,0 +1,588 @@
+{% extends 'base.html' %}
+{% block tittle %}
+  <title>Xóa User | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %} 
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-header-title">Xóa User</h1>
+      </div>
+      <!-- End Col -->
+
+      
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Page Header -->
+
+ 
+
+  <div class="row" style="display:none">
+    <div class="col-lg-5 mb-3 mb-lg-5">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Header -->
+        <div class="card-header card-header-content-between">
+          <h4 class="card-header-title">Import data into Front Dashboard</h4>
+
+          <!-- Dropdown -->
+          <div class="dropdown">
+            <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="reportsOverviewDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-three-dots-vertical"></i>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="reportsOverviewDropdown2">
+              <span class="dropdown-header">Settings</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-share-fill dropdown-item-icon"></i> Share chart
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-download dropdown-item-icon"></i> Download
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-alt dropdown-item-icon"></i> Connect other apps
+              </a>
+
+              <div class="dropdown-divider"></div>
+
+              <span class="dropdown-header">Feedback</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-chat-left-dots dropdown-item-icon"></i> Report
+              </a>
+            </div>
+          </div>
+          <!-- End Dropdown -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="card-body">
+          <p>See and talk to your users and leads immediately by importing your data into the Front Dashboard platform.</p>
+
+          <ul class="list-group list-group-flush list-group-no-gutters">
+            <li class="list-group-item">
+              <h5 class="card-title">Import users from:</h5>
+            </li>
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/capsule-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Capsule</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/mailchimp-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Mailchimp</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/google-webdev-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Webdev</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <li class="list-group-item"><span class="small text-muted">Or you can <a class="link" href="#">sync data to Front Dashboard</a> to ensure your data is always up-to-date.</span></li>
+          </ul>
+        </div>
+        <!-- End Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+    <!-- End Col -->
+
+    <div class="col-lg-7 mb-3 mb-lg-5">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Header -->
+        <div class="card-header card-header-content-sm-between">
+          <h4 class="card-header-title mb-2 mb-sm-0">Monthly expenses</h4>
+
+          <!-- Nav -->
+          <ul class="nav nav-segment nav-fill" id="expensesTab" role="tablist">
+            <li class="nav-item" data-bs-toggle="chart-bar" data-datasets="thisWeek" data-trigger="click" data-action="toggle">
+              <a class="nav-link active" href="javascript:;" data-bs-toggle="tab">This week</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="chart-bar" data-datasets="lastWeek" data-trigger="click" data-action="toggle">
+              <a class="nav-link" href="javascript:;" data-bs-toggle="tab">Last week</a>
+            </li>
+          </ul>
+          <!-- End Nav -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-sm mb-2 mb-sm-0">
+              <div class="d-flex align-items-center">
+                <span class="h1 mb-0">35%</span>
+                <span class="text-success ms-2">
+                  <i class="bi-graph-up"></i> 25.3%
+                </span>
+              </div>
+            </div>
+            <!-- End Col -->
+
+            <div class="col-sm-auto align-self-sm-end">
+              <div class="row fs-6 text-body">
+                <div class="col-auto">
+                  <span class="legend-indicator bg-primary"></span> New
+                </div>
+                <!-- End Col -->
+
+                <div class="col-auto">
+                  <span class="legend-indicator"></span> Overdue
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          <!-- Bar Chart -->
+          <div class="chartjs-custom">
+            <canvas id="updatingBarChart" style="height: 20rem;" data-hs-chartjs-options='{
+                      "type": "bar",
+                      "data": {
+                        "labels": ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"],
+                        "datasets": [{
+                          "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
+                          "backgroundColor": "#377dff",
+                          "hoverBackgroundColor": "#377dff",
+                          "borderColor": "#377dff"
+                        },
+                        {
+                          "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
+                          "backgroundColor": "#e7eaf3",
+                          "borderColor": "#e7eaf3"
+                        }]
+                      },
+                      "options": {
+                        "scales": {
+                          "yAxes": [{
+                            "gridLines": {
+                              "color": "#e7eaf3",
+                              "drawBorder": false,
+                              "zeroLineColor": "#e7eaf3"
+                            },
+                            "ticks": {
+                              "beginAtZero": true,
+                              "stepSize": 100,
+                              "fontSize": 12,
+                              "fontColor":  "#97a4af",
+                              "fontFamily": "Open Sans, sans-serif",
+                              "padding": 10,
+                              "postfix": "$"
+                            }
+                          }],
+                          "xAxes": [{
+                            "gridLines": {
+                              "display": false,
+                              "drawBorder": false
+                            },
+                            "ticks": {
+                              "fontSize": 12,
+                              "fontColor":  "#97a4af",
+                              "fontFamily": "Open Sans, sans-serif",
+                              "padding": 5
+                            },
+                            "categoryPercentage": 0.5,
+                            "maxBarThickness": "10"
+                          }]
+                        },
+                        "cornerRadius": 2,
+                        "tooltips": {
+                          "prefix": "$",
+                          "hasIndicator": true,
+                          "mode": "index",
+                          "intersect": false
+                        },
+                        "hover": {
+                          "mode": "nearest",
+                          "intersect": true
+                        }
+                      }
+                    }'></canvas>
+          </div>
+          <!-- End Bar Chart -->
+        </div>
+        <!-- End Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+    <!-- End Col -->
+  </div>
+  <!-- End Row -->
+
+  <!-- User  -->
+  <div class="card mb-3 mb-lg-5">
+    <form>
+      <input type="text" style="display: None;" id="inputEditId" value="{{ data_user.id }}" >
+
+      <div class="card-body">
+        <!-- Form Username-->
+        <div class="row mb-4">
+          <label for="inputUser" class="col-sm-3 col-form-label form-label">Username</label>
+
+          <div class="col-sm-9">
+            <div class="input-group input-group-sm-vertical">
+              <input type="text" class="form-control" id="inputUser" value="{{ data_user.username }}" readonly disabled>
+            </div>
+          </div>
+        </div>
+        <!-- End Form TUsername-->
+
+        <!-- Email -->
+        <div class="row mb-4">
+          <label for="inputEmail" class="col-sm-3 col-form-label form-label">Email</label>
+
+          <div class="col-sm-9">
+            <div class="input-group input-group-sm-vertical">
+              <input type="text" class="form-control" id="inputEmail" value="{{ data_user.email }}" readonly disabled>
+            </div>
+          </div>
+        </div>
+        <!-- End Email -->
+        
+        <!-- SĐT -->
+        <div class="row mb-4">
+          <label for="inputPhone" class="col-sm-3 col-form-label form-label">SĐT</label>
+
+          <div class="col-sm-9">
+            <div class="input-group input-group-sm-vertical">
+              <input type="text" class="form-control" id="inputPhone" value="{{ data_user.phonenumber }}" readonly disabled>
+            </div>
+          </div>
+        </div>
+        <!-- End SĐT -->
+
+        <!-- inputAddress -->
+        <div class="row mb-4">
+          <label for="inputAddress" class="col-sm-3 col-form-label form-label">CMND/CCCD</label>
+
+          <div class="col-sm-9">
+            <div class="input-group input-group-sm-vertical">
+              <input type="text" class="form-control" id="inputAddress" value="{{ data_user.address }}" readonly disabled>
+            </div>
+          </div>
+        </div>
+        <!-- End inputAddress -->
+      </div>
+    </form>
+  </div>
+  <!-- End User -->
+
+
+  <!-- KH -->
+  <div class="card mb-3 mb-lg-5">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="row justify-content-between align-items-center flex-grow-1">
+        <div class="col-md">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-header-title">Khách hàng</h4>
+
+           
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          <!-- Filter -->
+          <div class="row align-items-sm-center">
+            
+            <div class="col-md">
+              <form>
+                <!-- Search -->
+                <div class="input-group input-group-merge input-group-flush">
+                  <div class="input-group-prepend input-group-text">
+                    <i class="bi-search"></i>
+                  </div>
+                  <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Tìm kiếm...">
+                </div>
+                <!-- End Search -->
+              </form>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Filter -->
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Header -->
+
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+      <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+               "columnDefs": [{
+                  "targets": [4],
+                  "orderable": false
+                }],
+               "order": [],
+               "info": {
+                 "totalQty": "#datatableWithPaginationInfoTotalQty"
+               },
+               "search": "#datatableSearch",
+               "entries": "#datatableEntries",
+               "pageLength": 8,
+               "isResponsive": false,
+               "isShowPaging": false,
+               "pagination": "datatablePagination"
+             }'>
+        <thead class="thead-light">
+          <tr>
+            <th>STT</th>
+            <th>Tên khách hàng</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for cu in list_customer %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+           
+            <td>
+              {{ cu.full_name }}
+            </td>
+            <td>{{ cu.phonenumber }} </td>
+            <td>{{ cu.email }}</td>
+            <td>{{ cu.address }}</td>
+            
+          </tr>
+          {% endfor %}
+          
+
+          
+        </tbody>
+      </table>
+    </div>
+    <!-- End Table -->
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <!-- Pagination -->
+      <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+        <div class="col-sm mb-2 mb-sm-0">
+          <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+            <span class="me-2">Hiển thị:</span>
+
+            <!-- Select -->
+            <div class="tom-select-custom">
+              <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
+                        "searchInDropdown": false,
+                        "hideSearch": true
+                      }'>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8" selected>8</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <!-- End Select -->
+
+            <span class="text-secondary me-2">của</span>
+
+            <!-- Pagination Quantity -->
+            <span id="datatableWithPaginationInfoTotalQty"></span>
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm-auto">
+          <div class="d-flex justify-content-center justify-content-sm-end">
+            <!-- Pagination -->
+            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+          </div>
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End KH -->
+
+  <!-- User -->
+  <div class="card mb-3 mb-lg-5">
+    <form>
+      <div class="card-body">
+        <div class="mb-3">
+            <h3>
+                Chuyển User
+            </h3>
+        </div>
+        <!-- Form Loại Tình trạng-->
+        <div class="row mb-4">
+            <label for="inputUserNew" class="col-sm-3 col-form-label form-label">User mới <span> *</span></label>
+
+            <div class="col-sm-9">
+              <!-- Select -->
+                <div class="tom-select-custom">
+                  <select class="js-select form-select" id="inputUserNew" name="usernew" autocomplete="off"
+                          data-hs-tom-select-options='{
+                            "placeholder": "Chọn..."                            
+                          }' required>
+                    
+                    <option value="">Chọn...</option>
+                    {% for user in list_user %}
+                      <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <!-- End Select -->
+            </div>
+        </div>
+        <!-- End Form Tình trạng-->
+        <div class="alert alert-danger" role="alert" id="ShowMessage" style="display: None;">
+                
+        </div>
+
+      </div>
+    </form>
+  </div>
+  <div class="d-grid gap-2">
+    <button class="btn btn-danger btn-delete-user" type="button">Xóa User</button>
+  </div>
+  <!-- User -->
+
+</div>
+
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // delete User
+    $(document).on('click', '.btn-delete-user', function(event) {
+    var id_user_delete = document.getElementById("inputEditId").value;
+    // console.log(id_user_delete);
+    var id_user_new = document.getElementById("inputUserNew").value;
+    if ( id_user_new == '' ){
+      document.getElementById("ShowMessage").style.display = "block";
+      document.getElementById("ShowMessage").innerHTML = "Vui lòng chọn chuyển User !";
+      return false;
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: "manage/delete/user/"+id_user_delete,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': id_user_delete,
+          'usernew': $('#inputUserNew').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            alert(data['message'])
+            window.location.href = '/manage/user';
+
+          } else {
+            // alert(data['message'])
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML = data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          alert(data['message'])
+        }
+      })
+
+
+    });
+
+</script>
+
+
+{% endblock content %}

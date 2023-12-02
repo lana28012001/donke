@@ -1,0 +1,13 @@
+django==3.2
+			requests==2.28.1
+			django-filter==2.4.0
+			djangorestframework==3.12.2
+			django-import_export
+			xlsxwriter
+			pandas
+			unidecode
+
+# run
+# 			PS C:\Users\DELL\Downloads\donke_v2-main> venv/Scripts/activate          
+# (venv) PS C:\Users\DELL\Downloads\donke_v2-main> cd donke_v2-main
+# (venv) PS C:\Users\DELL\Downloads\donke_v2-main\donke_v2-main> py manage.py runserver

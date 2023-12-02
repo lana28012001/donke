@@ -1,0 +1,570 @@
+{% extends 'base.html' %}
+{% block tittle %}
+<title> Quản lý vai trò | Autohost - VBPO</title>
+{% endblock tittle %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Quản trị viên</a></li>
+<li class="breadcrumb-item active" aria-current="page">Quản lý vai trò</li>
+{% endblock breadcrumb %}
+
+{% load static %}
+
+{% block button %}
+<div class="col-sm-auto">
+  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#addRole">
+    <i class="tio-user-add mr-1"></i> Thêm mới
+  </a>
+</div>
+{% endblock button %}
+
+{% block content %}
+
+<!-- Card -->
+<div class="card">
+  <!-- Header -->
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center flex-grow-1">
+      <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+        <form>
+          <!-- Search -->
+          <div class="input-group input-group-merge input-group-flush">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tio-search"></i>
+              </div>
+            </div>
+            <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm..."
+              aria-label="Tìm kiếm...">
+          </div>
+          <!-- End Search -->
+        </form>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+          <!-- Datatable Info -->
+          
+          <!-- End Datatable Info -->
+
+
+        </div>
+      </div>
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Header -->
+
+  <!-- Table -->
+  <div class="table-responsive datatable-custom">
+    <table id="datatable"
+      class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+      data-hs-datatables-options='{
+              "columnDefs": [{
+                "targets": [0, 5],
+                "orderable": false
+              }],
+              "order": [],
+              "info": {
+                "totalQty": "#datatableWithPaginationInfoTotalQty"
+              },
+              "search": "#datatableSearch",
+              "entries": "#datatableEntries",
+              "pageLength": 15,
+              "isResponsive": false,
+              "isShowPaging": false,
+              "pagination": "datatablePagination"
+            }'>
+      <thead class="thead-light">
+        <tr>
+          
+          <th>STT</th>
+          <th>Tên vai trò</th>
+          <th>Bậc</th>
+          <th>Mô tả vai trò</th>
+          <th>Loại vai trò</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for role in list_role %}
+        <tr>
+
+          <td>
+            <span>{{ forloop.counter }}</span>
+          </td>
+
+          <td class="table-column-pl-0">
+            <a class="d-flex align-items-center" href="#">
+
+              <div class="ml-3">
+                <span class="d-block font-size-sm text-body">{{ role.name }}</span>
+              </div>
+            </a>
+          </td>
+
+          <td>
+            <span class="d-block font-size-sm">{{ role.level }}</span>
+          </td>
+
+          <td> {{ role.description }}</td>
+
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="font-size-sm mr-2">Người dùng định nghĩa</span>
+
+            </div>
+          </td>
+          
+
+          <td>
+            <a class="btn btn-sm btn-primary btn-detail-role" href="javascript:;" title="Cập nhật" data-toggle="modal"
+              data-target="#editRole" data-id-role="{{ role.id }}">
+              <i class="tio-update"></i>
+            </a>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- End Table -->
+
+  <!-- Footer -->
+  <div class="card-footer">
+    <!-- Pagination -->
+    <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+      <div class="col-sm mb-2 mb-sm-0">
+        <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+          <span class="mr-2">Hiển thị:</span>
+
+          <!-- Select -->
+          <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
+                    "minimumResultsForSearch": "Infinity",
+                    "customClass": "custom-select custom-select-sm custom-select-borderless",
+                    "dropdownAutoWidth": true,
+                    "width": true
+                  }'>
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+          </select>
+          <!-- End Select -->
+
+          <span class="text-secondary mr-2">của</span>
+
+          <!-- Pagination Quantity -->
+          <span id="datatableWithPaginationInfoTotalQty"></span>
+        </div>
+      </div>
+
+      <div class="col-sm-auto">
+        <div class="d-flex justify-content-center justify-content-sm-end">
+          <!-- Pagination -->
+          <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+        </div>
+      </div>
+    </div>
+    <!-- End Pagination -->
+  </div>
+  <!-- End Footer -->
+</div>
+<!-- End Card -->
+
+<!--  Modal Add Role -->
+<div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="addRoleTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h4 id="editUserModalTitle" class="modal-title">Thêm mới vai trò</h4>
+
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <!-- End Header -->
+
+      <!-- Body -->
+      <div class="modal-body">
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="AddRoleForm" action="{% url 'admin_role' %}" method="POST">
+              {% csrf_token %}
+              <!-- Form Group Tên vai trò-->
+              <div class="row form-group">
+                <label for="inputNameRole" class="col-sm-3 col-form-label input-label">Tên vai trò <i
+                    class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top"
+                    title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="name" id="inputNameRole" placeholder="Tên vai trò"
+                      aria-label="Tên vai trò">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Tên vai trò-->
+
+              <!-- Form Group Bậc-->
+              <div class="row form-group">
+                <label for="inputLevelRole" class="col-sm-3 col-form-label input-label">Bậc <i
+                    class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i>
+                </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" onpaste="return false;" name="level" id="inputLevelRole"
+                      placeholder="Bậc" aria-label="Bậc">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Bậc-->
+
+              <!-- Form Group Mô tả vai trò-->
+              <div class="row form-group">
+                <label for="inputDescriptionRole" class="col-sm-3 col-form-label input-label">Mô tả vai trò</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-down-break align-items-center">
+                    <input type="text" class="js-masked-input form-control" name="description" id="inputDescriptionRole"
+                      placeholder="Mô tả vai trò" aria-label="Mô tả vai trò">
+
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Mô tả vai trò-->
+
+              <!-- Form Group Quyền chức năng-->
+              <div class="row form-group">
+                <label for="inputMultiplePermission" class="col-sm-3 col-form-label input-label">Quyền chức
+                  năng <i
+                  class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <!-- Select2 -->
+                    <select class="js-select2-custom custom-select" id="inputMultiplePermission" name="permission[]" multiple size="1"
+                      style="opacity: 0;" data-hs-select2-options='{
+                      "minimumResultsForSearch": "Infinity"
+                    }'>
+                      {% for p in list_per %}
+                      <option value="{{ p.id }}">{{ p.name }}</option>
+                      {% endfor %}
+                    </select>
+                    <!-- End Select2 -->
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Quyền chức năng-->
+              <div class="alert alert-warning" role="alert" id="ShowMessage" style="display: None;">
+
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-white mr-2" data-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary btn-managerole">Lưu</button>
+
+              </div>
+
+            </form>
+            
+
+          </div>
+
+
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Modal Add Role-->
+
+<!--  Modal Edit Role -->
+<div class="modal fade" id="editRole" tabindex="-1" role="dialog" aria-labelledby="editRoleTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h4 id="editUserModalTitle" class="modal-title">Cập nhật vai trò</h4>
+
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <!-- End Header -->
+
+      <!-- Body -->
+      <div class="modal-body">
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="EditRoleForm" action="" method="">
+              {% csrf_token %}
+              <input type="text" style="display: None;" id="inputEditId" value="">
+              <!-- Form Group Tên vai trò-->
+              <div class="row form-group">
+                <label for="inputEditNameRole" class="col-sm-3 col-form-label input-label">Tên vai trò <i
+                    class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top"
+                    title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="name" id="inputEditNameRole" onKeyPress="if(this.value.length==15) return false;" maxlength="15" placeholder="Tên vai trò"
+                      aria-label="Tên vai trò">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Tên vai trò-->
+
+              <!-- Form Group Bậc-->
+              <div class="row form-group">
+                <label for="inputEditLevelRole" class="col-sm-3 col-form-label input-label">Bậc <i
+                    class="tio-star text-body ml-1 " data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i>
+                </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" onpaste="return false;" name="level" id="inputEditLevelRole"
+                      placeholder="Bậc" aria-label="Bậc">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Bậc-->
+
+              <!-- Form Group Mô tả vai trò-->
+              <div class="row form-group">
+                <label for="inputEditDescriptionRole" class="col-sm-3 col-form-label input-label">Mô tả vai trò</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-down-break align-items-center">
+                    <input type="text" class="js-masked-input form-control" name="description" id="inputEditDescriptionRole"
+                      placeholder="Mô tả vai trò" aria-label="Mô tả vai trò">
+
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Mô tả vai trò-->
+
+              <!-- Form Group Quyền chức năng-->
+              <div class="row form-group">
+                <label for="inputEditMultiplePermission" class="col-sm-3 col-form-label input-label">Quyền chức
+                  năng <i
+                  class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <!-- Select2 -->
+                    <select class="js-select2-custom custom-select" id="inputEditMultiplePermission" name="permission[]" multiple size="1"
+                      style="opacity: 0;" data-hs-select2-options='{
+                      "minimumResultsForSearch": "Infinity"
+                    }'>
+
+                      {% for p in list_per %}
+                      <option value="{{ p.id }}">{{ p.name }}</option>
+                      {% endfor %}
+
+                    </select>
+                    <!-- End Select2 -->
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Quyền chức năng-->
+              <div class="alert alert-warning" role="alert" id="ShowUpdateMessage" style="display: None;">
+
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-white mr-2" data-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary btn-update-role"
+                  >Lưu</button>
+
+              </div>
+
+            </form>
+            
+
+          </div>
+
+
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Modal Edit Role-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // save Role
+    $(document).on('click', '.btn-managerole', function (event) {
+      // preventing from page reload and default actions
+      event.preventDefault();
+      var namerole = document.getElementById("inputNameRole").value;
+      var level = document.getElementById("inputLevelRole").value;
+      var permission = document.getElementById('inputMultiplePermission').value;
+
+      
+      if ( namerole.replace(/\s/g, '') == "", level.replace(/\s/g, '') == "", permission == "") {
+
+        document.getElementById("ShowMessage").style.display = "block";
+        document.getElementById("ShowMessage").innerHTML = "Vui lòng điền vào ô bắt buộc!";
+
+        return false;
+
+      }
+
+      // make POST ajax call
+      $.ajax({
+        type: 'POST',
+        url: "admin/role",
+        // contentType: 'application/json; charset=utf-8',
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'name': $('#inputNameRole').val(),
+          'level': $('#inputLevelRole').val(),
+          'description': $('#inputDescriptionRole').val(),
+          'permission' : $('#inputMultiplePermission').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            $('#AddRoleForm').trigger('reset');
+            $('#inputMultiplePermission').val('').trigger('change');
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowMessage").style.display = "block";
+          document.getElementById("ShowMessage").innerHTML = data['message'];
+        }
+      })
+    
+    });
+
+    // get data Role
+    $(document).on('click', '.btn-detail-role', function(event) {
+      var data_id = (this.getAttribute('data-id-role'));
+      // console.log(data_id);
+
+      $.ajax({
+        type: 'GET',
+        url: "admin/update/role/"+data_id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': data_id,
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          if (data['type'] == 'success') {
+            $('#EditRoleForm').trigger('reset');
+            document.getElementById("inputEditId").value  = data_id;
+            document.getElementById("inputEditNameRole").value  = data['data_role']['name'];
+            document.getElementById("inputEditLevelRole").value = data['data_role']['level'];
+            document.getElementById("inputEditDescriptionRole").value = data['data_role']['description'];
+            const select = document.getElementById('inputEditMultiplePermission')
+            const selectValues = data['data_role']['list_id_per'];
+
+            /* Iterate options of select element */
+            for (const option of document.querySelectorAll('#inputEditMultiplePermission option')) {
+
+              /* Parse value to integer */
+              const value = Number.parseInt(option.value);
+
+              /* If option value contained in values, set selected attribute */
+              if (selectValues.indexOf(value) !== -1) {
+                option.setAttribute('selected', 'selected');
+              }
+              /* Otherwise ensure no selected attribute on option */
+              else {
+                option.removeAttribute('selected');
+              }
+            }
+
+            console.log(data['data_role'])
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowMessage").style.display = "block";
+          document.getElementById("ShowMessage").innerHTML = data['message'];
+        }
+      
+      })
+    
+    });
+
+    // post update role
+    $(document).on('click', '.btn-update-role', function(event) {
+      var id = document.getElementById("inputEditId").value;
+      console.log(id);
+      
+      $.ajax({
+        type: 'POST',
+        url: "admin/update/role/"+id,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'name': $('#inputEditNameRole').val(),
+          'level': $('#inputEditLevelRole').val(),
+          'description': $('#inputDescriptionRole').val(),
+          'permission' : $('#inputEditMultiplePermission').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          document.getElementById("ShowUpdateMessage").style.display = "block";
+          document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+</script>
+
+{% endblock content %}
+
+{% block js_custom %}
+<script>
+
+
+</script>
+{% endblock js_custom %}

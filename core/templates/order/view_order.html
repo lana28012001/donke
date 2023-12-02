@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+{% block tittle %}
+<title>Chi tiết đơn kê | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %}
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<style>
+    .inputProduct {
+        width: 25%;
+    }
+</style>
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="page-header-title">Chi tiết đơn kê</h1>
+            </div>
+            <!-- End Col -->
+
+
+            <!-- End Col -->
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Page Header -->
+
+    <div class="row">
+        <form action="" method="" enctype="multipart/form-data">
+
+            <input type="text" style="display: None;" id="inputUser" name="user" value="{{ request.user.id }}">
+
+            <!-- Customer -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Header -->
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center flex-grow-1">
+                        <div class="col-md">
+                            <!-- End Header -->
+                            <!-- Form Khách hàng-->
+                            <div class="row mb-4">
+                                <label for="inputUseto" class="col-sm-3 col-form-label form-label">Khách hàng</label>
+    
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="use_to" id="inputUseto"
+                                        placeholder="Khách hàng" aria-label="Khách hàng" 
+                                         value="{{ orders.customer.full_name }}" disabled>
+                                </div>
+                            </div>
+                            <!-- End Form Khách hàng-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- End Col -->
+
+            </div>
+            <!-- End Customer -->
+
+
+            <!-- Product -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Header -->
+                    <div class="card-header card-header-content-between">
+                        <h4 class="card-header-title">Chi tiết thuốc</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Table Thuốc -->
+                        <div class="table-responsive datatable-custom">
+                            <table id="datatableProduct"
+                                class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Ngày</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Buổi</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for order_product in list_order_product %}
+                                    <tr>
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <input type="text" class="form-control"  value="{{ order_product.day.day }}" disabled>
+                                            </div>
+                                        </td>
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <input type="text" class="form-control"  value="{{ order_product.product.product }}" disabled>
+                                            </div>
+                                        </td>
+
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <input type="text" class="form-control"  value="{{ order_product.buoi.buoi }}" disabled>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            
+
+                        </div>
+                        <!-- End Table Thuốc-->
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Product -->
+
+            <!-- Service -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Header -->
+                    <div class="card-header card-header-content-between">
+                        <h4 class="card-header-title">Chi tiết dịch vụ</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Table Service -->
+                        <div class="table-responsive datatable-custom">
+                            <table id="datatableService"
+                                class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Thời gian</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for order_service in list_order_service %}
+                                    <tr>
+                                        <td>
+                                            <div class="tom-select-custom">
+                                                <input type="text" class="form-control"  value="{{ order_service.service.service }}" disabled>
+                                                
+                                            </div>
+                                        </td>
+                                        <td> 
+                                            <input type="text" class="form-control"  value="{{ order_service.time }}" disabled>
+                                         </td>
+
+                                        <td> 
+                                            <input type="text" class="form-control"  value="{{ order_service.note }}" disabled>
+                                        </td>
+
+                                        
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                            
+
+                        </div>
+                        <!-- End Table  Service-->
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Service -->
+
+            <!-- Don ke -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Body -->
+                    <div class="card-body">
+
+                        <!-- Form Ngày tái khám-->
+                        <div class="row mb-4">
+                            <label for="inputDayCalender" class="col-sm-3 col-form-label form-label">Ngày tái
+                                khám</label>
+
+                            <div class="col-sm-9">
+                                <!-- Flatpickr -->
+                                <input type="text" id="inputDayCalender" class="flatpickr-custom-form-control form-control" placeholder="Ngày" value="{{orders.day_re_examination|date:"d-m-Y"}}">
+                            <!-- End Flatpickr -->
+                            </div>
+                        </div>
+                        <!-- End Form Ngày tái khám-->
+
+                        <!-- Form Cách dùng-->
+                        <div class="row mb-4">
+                            <label for="inputUseto" class="col-sm-3 col-form-label form-label">Cách dùng</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" style="display: none;" class="form-control" name="use_to" id="inputUseto" placeholder="Cách dùng" aria-label="Cách dùng" autocomplete="off" value="{{orders.use_to}}">
+
+                                <textarea class="form-control" id="inputUseto" placeholder="Cách dùng" aria-label="Cách dùng" autocomplete="off" rows="5">{% if orders.use_to != None %}{{orders.use_to}}{% endif %}</textarea>
+
+                            </div>
+                        </div>
+                        <!-- End Form Cách dùng-->
+
+                        <!-- Form Chi tiết lịch khám-->
+                        <div class="row mb-4">
+                            <label for="inputDetailCalender" class="col-sm-3 col-form-label form-label">Chi tiết lịch
+                                khám</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="{% if orders.detail_caleder_examination != None %}{{orders.detail_caleder_examination}}{% endif %}"
+                                    id="inputDetailCalender" placeholder="Chi tiết lịch khám"
+                                    aria-label="Chi tiết lịch khám"  autocomplete="off">
+                            </div>
+                        </div>
+                        <!-- End Form Chi tiết lịch khám-->
+
+                        <!-- Form Ảnh trước điều trị-->
+                        <div class="row mb-4">
+                            <label for="inputBefore" class="col-sm-3 col-form-label form-label">Ảnh trước điều trị</label>
+
+                            <div class="col-sm-9">
+                                {% for img in list_before %}
+                                    <a href="{{ img }}" data-fslightbox="gallery">
+                                        <img class="img-fluid" src="{{ img }}" alt="Image Description" style="height:80px!important; width:80px!important;" >
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- End Form Ảnh trước điều trị-->
+
+                        <!-- Form Ảnh sau điều trị-->
+                        <div class="row mb-4">
+                            <label for="inputAfter" class="col-sm-3 col-form-label form-label">Ảnh sau điều trị</label>
+
+                            <div class="col-sm-9">
+                                {% for img in list_after %}
+                                    
+                                    <a href="{{ img }}" data-fslightbox="gallery">
+                                        <img class="img-fluid" src="{{ img }}" alt="Image Description" style="height:80px!important; width:80px!important;" >
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- End Form Ảnh sau điều trị-->
+
+                        <!-- Form Ghi chú đơn kê-->
+                        <div class="row mb-4">
+                            <label for="inputEditNote" class="col-sm-3 col-form-label form-label">Ghi chú</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" style="display: none;" name="note_order" id="inputHideNote" placeholder="Cách dùng" aria-label="Cách dùng" autocomplete="off" value="{{ note_order|linebreaks }}">
+
+                                <textarea class="form-control" name="note_order" id="inputEditNote" placeholder="Ghi chú" aria-label="Ghi chú" rows="5">{% if orders.note_order != None %}{{orders.note_order}}{% endif %}</textarea>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        <!-- End Form Ghi chú đơn kê-->
+
+                        <!-- Form Bệnh lý-->
+                        <div class="row mb-4">
+                            <label for="inputEditBenhLy" class="col-sm-3 col-form-label form-label">Bệnh lý</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="pathological"
+                                    id="inputEditBenhLy" placeholder="Bệnh lý"
+                                    aria-label="Bệnh lý"  autocomplete="off" value="{% if orders.pathological != None %}{{orders.pathological}}{% endif %}">
+                            </div>
+                        </div>
+                        <!-- End Form Bệnh lý-->
+
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Don ke -->
+
+
+            <div class="d-grid gap-2" style="display: none;">
+                <button class="button-8" type="submit" style="display: none;">Lưu</button>
+            </div>
+        </form>
+    </div>
+    <!-- End Row -->
+
+</div>
+<!-- End Row -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- <script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script> -->
+
+{% endblock content %}
+
+{% block js_custom %}
+
+
+
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+
+
+      // INITIALIZATION OF CLIPBOARD
+      // =======================================================
+      HSCore.components.HSClipboard.init('.js-clipboard')
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+</script>
+
+<!-- End Style Switcher JS -->
+{% endblock js_custom %}

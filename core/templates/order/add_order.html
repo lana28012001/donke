@@ -1,0 +1,525 @@
+{% extends 'base.html' %}
+{% block tittle %}
+<title>Thêm mới đơn kê | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %}
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<style>
+    .inputProduct {
+        width: 25%;
+    }
+</style>
+<div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="page-header-title">Thêm mới đơn kê</h1>
+            </div>
+            <!-- End Col -->
+
+
+            <!-- End Col -->
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Page Header -->
+
+    <div class="row">
+        <form action="manage/add/order" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="text" style="display: None;" id="inputUser" name="user" value="{{ request.user.id }}">
+
+            <!-- Customer -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Header -->
+                <div class="card-header">
+                    <div class="row justify-content-between align-items-center flex-grow-1">
+                        <div class="col-md">
+                            <!-- End Header -->
+                            <!-- Form Khách hàng-->
+                            <div class="row mb-4">
+                                <label for="inputCustomer" class="col-sm-3 col-form-label form-label">Khách hàng</label>
+
+                                <div class="col-sm-9">
+
+                                    <!-- Select -->
+                                    <div class="tom-select-custom">
+                                        <select class="js-select form-select" id="inputCustomer" name="customer"
+                                            autocomplete="off" data-hs-tom-select-options='{
+                                                "searchInDropdown": false,
+                                                "hidePlaceholderOnSearch": true,
+                                                "placeholder": "Chọn..."
+                                                }' required>
+                                            <option value="">Chọn...</option>
+                                            {% for customer in list_customer %}
+
+                                            <option value="{{ customer.id }}">{{ customer.full_name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                    <!-- End Select -->
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- End Col -->
+
+            </div>
+            <!-- End Customer -->
+
+
+            <!-- Product -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Header -->
+                    <div class="card-header card-header-content-between">
+                        <h4 class="card-header-title">Chi tiết thuốc</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Table Thuốc -->
+                        <div class="table-responsive datatable-custom">
+                            <table id="datatableProduct"
+                                class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Ngày</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Buổi</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td class="inputProduct"> <input type="number" class="form-control"
+                                                pattern="/^-?\d+\.?\d*$/"  autocomplete="off"
+                                                required> </td>
+                                        
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <select class="js-select form-select" name="day-1" autocomplete="off"
+                                                    data-hs-tom-select-options='{
+                                                        "placeholder": "Chọn..."
+                                                        }' required>
+
+                                                    <option value="">Chọn...</option>
+                                                    {% for d in list_day %}
+                                                    <option value="{{ d.id }}">{{ d.day }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <select class="js-select form-select" name="product-1" autocomplete="off"
+                                                    data-hs-tom-select-options='{
+                                                            "placeholder": "Chọn..."
+                                                            }' required>
+
+                                                    <option value="">Chọn...</option>
+                                                    {% for po in list_product %}
+                                                    <option value="{{ po.id }}">{{ po.product }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="inputProduct">
+                                            <div class="tom-select-custom">
+                                                <select class="js-select form-select" name="buoi-1" autocomplete="off"
+                                                    data-hs-tom-select-options='{
+                                                        "placeholder": "Chọn..."
+                                                        }' required>
+
+                                                    <option value="">Chọn...</option>
+                                                    {% for b in list_buoi %}
+                                                    <option value="{{ b.id }}">{{ b.buoi }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <a class="button-8" title="Xóa" type="button">Xóa hàng
+
+                                            </a>
+                                            <a class="button-8" id="btnProduct">
+                                                <i class="bi-person-plus-fill me-1"></i> Thêm hàng
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% comment %} <div class="col-auto">
+                                <a class="button-8" id="btnProduct">
+                                    <i class="bi-person-plus-fill me-1"></i> Thêm hàng
+                                </a>
+                            </div> {% endcomment %}
+
+                        </div>
+                        <!-- End Table Thuốc-->
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Product -->
+
+            <!-- Service -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Header -->
+                    <div class="card-header card-header-content-between">
+                        <h4 class="card-header-title">Chi tiết dịch vụ</h4>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Body -->
+                    <div class="card-body">
+                        <!-- Table Service -->
+                        <div class="table-responsive datatable-custom">
+                            <table id="datatableService"
+                                class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Tên dịch vụ</th>
+                                        <th>Thời gian</th>
+                                        <th>Ghi chú</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="tom-select-custom">
+                                                <select class="js-select form-select" name="service-1" autocomplete="off"
+                                                    data-hs-tom-select-options='{
+                                                                "placeholder": "Chọn..."
+                                                                }'>
+
+                                                    <option value="">Chọn...</option>
+                                                    {% for se in list_service %}
+                                                    <option value="{{ se.id }}">{{ se.service }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </td>
+
+                                        <td> <input type="time" name="time-1" class="form-control"
+                                                 autocomplete="off"> </td>
+
+                                        <td> <input type="text" name="note-1" class="form-control"
+                                                 autocomplete="off"> </td>
+
+                                        <td>
+                                            <a class="button-8" href="javascript:;" type="button"
+                                                title="Xóa"> Xóa hàng
+
+                                            </a>
+                                            <a class="button-8" href="javascript:;" id="btnService">
+                                                <i class="bi-person-plus-fill me-1"></i> Thêm hàng
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                            {% comment %} <div class="col-auto">
+                                <a class="btn btn-primary" href="javascript:;" id="btnService">
+                                    <i class="bi-person-plus-fill me-1"></i> Thêm hàng
+                                </a>
+                            </div> {% endcomment %}
+
+                        </div>
+                        <!-- End Table  Service-->
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Service -->
+
+            <!-- Don ke -->
+            <div class="col-lg-12 mb-3 mb-lg-12">
+                <!-- Card -->
+                <div class="card h-100">
+                    <!-- Form Khách hàng-->
+
+                    <!-- Body -->
+                    <div class="card-body">
+
+                        <!-- Form Ngày tái khám-->
+                        <div class="row mb-4">
+                            <label for="inputDayCalender" class="col-sm-3 col-form-label form-label">Ngày tái
+                                khám</label>
+
+                            <div class="col-sm-9">
+                                <!-- Flatpickr -->
+                                <div id="inputDayCalender" class="js-flatpickr flatpickr-custom" data-hs-flatpickr-options='{
+                                    "appendTo": "#inputDayCalender",
+                                    "dateFormat": "Y-m-d",
+                                    "wrap": true
+                                }'>
+                                <input type="text" class="flatpickr-custom-form-control form-control" name="day_re_examination" placeholder="Chọn ngày" data-input value="">
+                            </div>
+                            <!-- End Flatpickr -->
+                            </div>
+                        </div>
+                        <!-- End Form Ngày tái khám-->
+
+                        <!-- Form Cách dùng-->
+                        <div class="row mb-4">
+                            <label for="inputUseto" class="col-sm-3 col-form-label form-label">Cách dùng</label>
+
+                            <div class="col-sm-9">
+                                <!-- <input type="text" class="form-control" name="use_to" id="inputUseto"  placeholder="Cách dùng" aria-label="Cách dùng"   autocomplete="off"> -->
+                                <textarea class="form-control" name="use_to" id="inputUseto"  placeholder="Cách dùng" aria-label="Cách dùng" autocomplete="off"  rows="5"></textarea>
+
+                            </div>
+                        </div>
+                        <!-- End Form Cách dùng-->
+
+                        <!-- Form Chi tiết lịch khám-->
+                        <div class="row mb-4">
+                            <label for="inputDetailCalender" class="col-sm-3 col-form-label form-label">Chi tiết lịch
+                                khám</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="detail_caleder_examination"
+                                    id="inputDetailCalender" placeholder="Chi tiết lịch khám"
+                                    aria-label="Chi tiết lịch khám"  autocomplete="off">
+                            </div>
+                        </div>
+                        <!-- End Form Chi tiết lịch khám-->
+
+                        <!-- Form Ảnh trước điều trị-->
+                        <div class="row mb-4">
+                            <label for="inputDayCalender" class="col-sm-3 col-form-label form-label">Ảnh trước điều trị</label>
+
+                            <div class="col-sm-9">
+                                <label for="FormFileBefore" class="js-file-attach form-label"
+                                    data-hs-file-attach-options='{
+                                    "textTarget": "[for=\"customFile\"]"
+                                        }'></label>
+                                <input class="form-control" type="file" name="file_before[]" id="FormFileBefore" accept=".png, .jpg, .jpeg, .svg" multiple>
+                            </div>
+                        </div>
+                        <!-- End Form Ảnh trước điều trị-->
+
+                        <!-- Form Ảnh sau điều trị-->
+                        <div class="row mb-4">
+                            <label for="inputDayCalender" class="col-sm-3 col-form-label form-label">Ảnh sau điều trị</label>
+
+                            <div class="col-sm-9">
+                                <label for="FormFileAfter" class="js-file-attach form-label"
+                                    data-hs-file-attach-options='{
+                                    "textTarget": "[for=\"customFile\"]"
+                                        }'></label>
+                                <input class="form-control" type="file" name="file_after[]" id="FormFileAfter" accept=".png, .jpg, .jpeg, .svg" multiple>
+                            </div>
+                        </div>
+                        <!-- End Form Ảnh sau điều trị-->
+
+                        <!-- Form Ghi chú đơn kê-->
+                        <div class="row mb-4">
+                            <label for="inputNote" class="col-sm-3 col-form-label form-label">Ghi chú</label>
+
+                            <div class="col-sm-9">
+                                <!-- <input type="text" class="form-control" name="note_order" id="inputNote" placeholder="Ghi chú đơn kê"  aria-label="Ghi chú đơn kê"  autocomplete="off"> -->
+
+                                <textarea class="form-control" name="note_order"   id="inputNote" placeholder="Ghi chú đơn kê"  aria-label="Ghi chú đơn kê"  autocomplete="off"  rows="5"></textarea>
+
+                            </div>
+                        </div>
+                        <!-- End Form Ghi chú đơn kê-->
+
+                        <!-- Form Bệnh lý-->
+                        <div class="row mb-4">
+                            <label for="inputBenhLy" class="col-sm-3 col-form-label form-label">Bệnh lý</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="pathological"
+                                    id="inputBenhLy" placeholder="Bệnh lý"
+                                    aria-label="Bệnh lý"  autocomplete="off">
+                            </div>
+                        </div>
+                        <!-- End Form Bệnh lý-->
+
+
+                    </div>
+                    <!-- End Body -->
+                </div>
+                <!-- End Card -->
+            </div>
+            <!-- End Don ke -->
+
+
+            <div class="d-grid gap-2">
+                <button class="button-8" type="submit">Lưu</button>
+            </div>
+        </form>
+    </div>
+    <!-- End Row -->
+
+</div>
+<!-- End Row -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- <script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script> -->
+
+<script>
+    // add/delete row đơn thuoc
+    $('#datatableProduct').on('click', 'a[type="button"]', function () {
+        $(this).closest('tr').remove();
+    })
+    $('#btnProduct').click(function () {
+        var countRow = $('#datatableProduct tr').length;
+
+        $('#datatableProduct').append('<tr>  <td class="inputProduct"> <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/"   autocomplete="off" required> </td>  <td class="inputProduct"> <div class="tom-select-custom">  <select class="js-select form-select"  name="day-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{    "placeholder": "Chọn..."    }" required>  <option value="">Chọn...</option>  {% for d in list_day %}    <option value="{{ d.id }}">{{ d.day }}</option>    {% endfor %}  </select>  </div> </td>  <td class="inputProduct">   <div class="tom-select-custom">  <select class="js-select form-select"  name="product-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{    "placeholder": "Chọn..."   }">   <option value="">Chọn...</option>   {% for po in list_product %}  <option value="{{ po.id }}">{{ po.product }}</option>  {% endfor %}   </select>  </div>   </td>  <td> <div class="tom-select-custom">  <select class="js-select form-select"  name="buoi-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{   "placeholder": "Chọn..."     }" required>  <option value="">Chọn...</option>   {% for b in list_buoi %}   <option value="{{ b.id }}">{{ b.buoi }}</option>    {% endfor %}   </select>   </div> </td> <td> <a class="button-8" title="Xóa" type="button">Xóa hàng   </a>     </td>  </tr>')
+
+    });
+
+    // add/delete row dich vu
+    $('#datatableService').on('click', 'a[type="button"]', function () {
+        $(this).closest('tr').remove();
+    })
+    $('#btnService').click(function () {
+        var countRow = $('#datatableService tr').length;
+
+        $('#datatableService').append('<tr>  <td> <div class="tom-select-custom"> <select class="js-select form-select" name="service-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{   "placeholder": "Chọn..."  }">  <option value="">Chọn...</option>  {% for se in list_service %}  <option value="{{ se.id }}">{{ se.service }}</option> {% endfor %}   </select>   </div>   </td>   <td> <input type="time" name="time-' + countRow + '" class="form-control"  autocomplete="off"> </td>  <td> <input type="text" name="note-' + countRow + '" class="form-control"  autocomplete="off"> </td> <td>  <a class="button-8" href="javascript:;" type="button"  title="Xóa"> Xóa hàng     </a>  </td>   </tr>')
+
+    });
+
+</script>
+{% endblock content %}
+
+{% block js_custom %}
+
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+
+
+      // INITIALIZATION OF CLIPBOARD
+      // =======================================================
+      HSCore.components.HSClipboard.init('.js-clipboard')
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+</script>
+
+<!-- End Style Switcher JS -->
+{% endblock js_custom %}

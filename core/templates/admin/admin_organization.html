@@ -1,0 +1,711 @@
+{% extends 'base.html' %}
+{% block tittle %}
+<title> Quản lý đơn vị | Autohost - VBPO</title>
+{% endblock tittle %}
+
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Quản trị viên</a></li>
+<li class="breadcrumb-item active" aria-current="page">Quản lý đơn vị</li>
+{% endblock breadcrumb %}
+
+{% load static %}
+
+{% block button %}  
+<div class="col-sm-auto">
+  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#addOrganization">
+    <i class="tio-user-add mr-1"></i> Thêm mới
+  </a>
+</div>
+{% endblock button %}
+
+{% block content %}
+
+<!-- Card -->
+<div class="card">
+  <!-- Header -->
+  <div class="card-header">
+    <div class="row justify-content-between align-items-center flex-grow-1">
+      <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+        <form>
+          <!-- Search -->
+          <div class="input-group input-group-merge input-group-flush">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tio-search"></i>
+              </div>
+            </div>
+            <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Tìm kiếm...">
+          </div>
+          <!-- End Search -->
+        </form>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+          <!-- Datatable Info -->
+          
+          <!-- End Datatable Info -->
+
+          
+        </div>
+      </div>
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Header -->
+
+  <!-- Table -->
+  <div class="table-responsive datatable-custom">
+    <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+            data-hs-datatables-options='{
+              "columnDefs": [{
+                "targets": [0, 4],
+                "orderable": false
+              }],
+              "order": [],
+              "info": {
+                "totalQty": "#datatableWithPaginationInfoTotalQty"
+              },
+              "search": "#datatableSearch",
+              "entries": "#datatableEntries",
+              "pageLength": 15,
+              "isResponsive": false,
+              "isShowPaging": false,
+              "pagination": "datatablePagination"
+            }'>
+      <thead class="thead-light">
+        <tr>
+          
+          <th>STT</th>
+          <th>Mã mã đơn vị</th>
+          <th>Tên đơn vị</th>
+          <th>Địa chỉ</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for o in list_organization %}
+        <tr>
+
+          <td>
+            <span>{{ forloop.counter }}</span>
+          </td>
+
+          <td class="table-column-pl-0">
+            <a class="d-flex align-items-center" href="#">
+              
+              <div class="ml-3">
+                <span class="d-block font-size-sm text-body">{{ o.code }}</span>
+              </div>
+            </a>
+          </td>
+
+          <td>
+            <span class="d-block font-size-sm">{{ o.name }}</span>
+          </td>
+
+          <td>{{ o.address }}</td>
+          
+          
+          <td>
+            <a class="btn btn-sm btn-primary btn-get-organization" href="javascript:;" title="Cập nhật" data-toggle="modal" data-target="#UpdateSite" data-id="{{ o.id }}">
+              <i class="tio-update"></i>
+            </a>
+            <a class="btn btn-sm btn-danger btn-delete-organization" href="javascript:;" title="Xóa" data-toggle="modal" data-target="#DeleteOrganization" data-id="{{ o.id }}">
+              <i class="tio-delete"></i>
+            </a>
+            
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- End Table -->
+
+  <!-- Footer -->
+  <div class="card-footer">
+    <!-- Pagination -->
+    <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+      <div class="col-sm mb-2 mb-sm-0">
+        <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+          <span class="mr-2">Hiển thị:</span>
+
+          <!-- Select -->
+          <select id="datatableEntries" class="js-select2-custom"
+                  data-hs-select2-options='{
+                    "minimumResultsForSearch": "Infinity",
+                    "customClass": "custom-select custom-select-sm custom-select-borderless",
+                    "dropdownAutoWidth": true,
+                    "width": true
+                  }'>
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+          </select>
+          <!-- End Select -->
+
+          <span class="text-secondary mr-2">từ</span>
+
+          <!-- Pagination Quantity -->
+          <span id="datatableWithPaginationInfoTotalQty"></span>
+        </div>
+      </div>
+
+      <div class="col-sm-auto">
+        <div class="d-flex justify-content-center justify-content-sm-end">
+          <!-- Pagination -->
+          <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+        </div>
+      </div>
+    </div>
+    <!-- End Pagination -->
+  </div>
+  <!-- End Footer -->
+</div>
+<!-- End Card -->
+
+<!--  Modal Add Organization -->
+<div class="modal fade" id="addOrganization" tabindex="-1" role="dialog" aria-labelledby="addOrganizationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h4 id="editUserModalTitle" class="modal-title">Thêm mới đơn vị</h4>
+
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <!-- End Header -->
+
+      <!-- Body -->
+      <div class="modal-body">
+      
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form action="" method="POST" id="addOrganizationForm">
+              {% csrf_token %}
+              <!-- Form Group Mã đơn vị-->
+              <div class="row form-group">
+                <label for="inputCode" class="col-sm-3 col-form-label input-label">Mã đơn vị <i class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" onKeyPress="if(this.value.length==15)" name="code" placeholder="Mã đơn vị" id="inputCode" aria-label="Tên vai trò">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Mã đơn vị-->
+
+              <!-- Form Group Tên đơn vị-->
+              <div class="row form-group">
+                <label for="inputNameSite" class="col-sm-3 col-form-label input-label">Tên đơn vị <i class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i> </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <input type="text" class="form-control" onKeyPress="if(this.value.length==150) return false;" name="name" id="inputNameSite" placeholder="Tên đơn vị" aria-label="Tên đơn vị">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group -->
+              
+              <!-- Form Group Thuộc tổ chức-->
+              <div class="row form-group">
+                <label for="inputGroup" class="col-sm-3 col-form-label input-label">Thuộc tổ chức </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    
+                    <!-- Select2 -->
+                    <select class="js-select2-custom custom-select" id="inputGroup" name="group" size="1" style="opacity: 0;"
+                    data-hs-select2-options='{
+                      "minimumResultsForSearch": "Infinity",
+                      "placeholder": "Chọn"
+                    }'>
+                    <option label="empty"></option>
+                    {% for group in list_group %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                    
+                    </select>
+                    <!-- End Select2 -->
+
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Thuộc tổ chức-->
+
+              <!-- Form Group Tên viết tắt-->
+              <div class="row form-group">
+                <label for="inputSign" class="col-sm-3 col-form-label input-label">Tên viết tắt</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-down-break align-items-center">
+                    <input type="text" class="js-masked-input form-control" name="sign_site" id="inputSign" placeholder="Tên viết tắt" aria-label="Tên viết tắt">
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Tên viết tắt-->
+
+              <!-- Form Group Địa chỉ-->
+              <div class="row form-group">
+                <label for="inputAddress" class="col-sm-3 col-form-label input-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="address" id="inputAddress" placeholder="Địa chỉ" aria-label="Địa chỉ">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Địa chỉ-->
+              
+              <!-- Form Group SĐT-->
+              <div class="row form-group">
+                <label for="inputPhone" class="col-sm-3 col-form-label input-label">SĐT</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==11) return false;" onpaste="return false;" name="number_phone" id="inputPhone" placeholder="SĐT" aria-label="SĐT">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group SĐT-->
+
+              <!-- Form Group Ghi chú-->
+              <div class="row form-group">
+                <label for="inputNote" class="col-sm-3 col-form-label input-label">Ghi chú</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="note" id="inputNote" placeholder="Ghi chú" aria-label="Ghi chú">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Ghi chú-->
+
+              <div class="alert alert-warning" role="alert" id="ShowMessage" style="display: None;">
+
+              </div>
+
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-white mr-2" data-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary btn-add-organization">Lưu</button>
+
+              </div>
+
+            </form>
+           
+
+          </div>
+
+
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Modal Add Organization-->
+
+<!--  Modal Edit Organization -->
+<div class="modal fade" id="UpdateSite" tabindex="-1" role="dialog" aria-labelledby="UpdateSiteTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h4 id="editUserModalTitle" class="modal-title">Cập nhật đơn vị</h4>
+
+        <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <!-- End Header -->
+
+      <!-- Body -->
+      <div class="modal-body">
+      
+        <!-- Tab Content -->
+        <div class="tab-content" id="editUserModalTabContent">
+
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form action="" method="" id="editOrganizationForm">
+              {% csrf_token %}
+
+              <input type="text" style="display: None;" id="inputEditId" value="">
+
+              <!-- Form Group Mã đơn vị-->
+              <div class="row form-group">
+                <label for="inputEditCode" class="col-sm-3 col-form-label input-label">Mã đơn vị <i class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i></label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="code" placeholder="Mã đơn vị" id="inputEditCode" aria-label="Tên vai trò">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Mã đơn vị-->
+
+              <!-- Form Group Tên đơn vị-->
+              <div class="row form-group">
+                <label for="inputEditNameSite" class="col-sm-3 col-form-label input-label">Tên đơn vị <i class="tio-star text-body ml-1" data-toggle="tooltip" data-placement="top" title="Bắt buộc."></i> </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <input type="text" class="form-control" onKeyPress="if(this.value.length==150) return false;" name="name" id="inputEditNameSite" placeholder="Tên đơn vị" aria-label="Tên đơn vị">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group -->
+              
+              <!-- Form Group Thuộc tổ chức-->
+              <div class="row form-group">
+                <label for="inputEditGroup" class="col-sm-3 col-form-label input-label">Thuộc tổ chức  </label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message">
+                    <!-- Select2 -->
+                    <select class="js-select2-custom custom-select" id="inputEditGroup" name="group" size="1" style="opacity: 0;"
+                    data-hs-select2-options='{
+                      "minimumResultsForSearch": "Infinity",
+                      "placeholder": "Chọn"
+                    }'>
+                    <option label="empty"></option>
+                    {% for group in list_group %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                    
+                    </select>
+                    <!-- End Select2 -->
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Thuộc tổ chức-->
+
+              <!-- Form Group Tên viết tắt-->
+              <div class="row form-group">
+                <label for="inputEditSign" class="col-sm-3 col-form-label input-label">Tên viết tắt</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-down-break align-items-center">
+                    <input type="text" class="js-masked-input form-control" name="sign_site" id="inputEditSign" placeholder="Tên viết tắt" aria-label="Tên viết tắt">
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Tên viết tắt-->
+
+              <!-- Form Group Địa chỉ-->
+              <div class="row form-group">
+                <label for="inputEditAddress" class="col-sm-3 col-form-label input-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="address" id="inputEditAddress" placeholder="Địa chỉ" aria-label="Địa chỉ">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Địa chỉ-->
+              
+              <!-- Form Group SĐT-->
+              <div class="row form-group">
+                <label for="inputEditPhone" class="col-sm-3 col-form-label input-label">SĐT</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="number_phone" id="inputEditPhone" placeholder="SĐT" aria-label="SĐT">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group SĐT-->
+
+              <!-- Form Group Ghi chú-->
+              <div class="row form-group">
+                <label for="inputEditNote" class="col-sm-3 col-form-label input-label">Ghi chú</label>
+
+                <div class="col-sm-9">
+                  <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="note" id="inputEditNote" placeholder="Ghi chú" aria-label="Ghi chú">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Group Ghi chú-->
+
+              <div class="alert alert-warning" role="alert" id="ShowUpdateMessage" style="display: None;">
+
+              </div>
+
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-white mr-2" data-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary btn-update-organization">Lưu</button>
+
+              </div>
+
+            </form>
+           
+
+          </div>
+
+
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Modal Edit Organization-->
+
+<!-- Modal Delete Organization-->
+<div class="modal fade" id="DeleteOrganization" tabindex="-1" role="dialog" aria-labelledby="DeleteOrganizationLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa</h5>
+        <button type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <!-- <input type="text" id="txtA"> -->
+          <label for="content-name-organization">Tên đơn vị</label>
+          <p id="content-name-organization">
+          
+          </p>
+        </div>
+        <div>
+          <label for="content-code-organization">Mã đơn vị</label>
+          <p id="content-code-organization">
+           
+          </p>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Delete Organization-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // save Organization
+    $(document).on('click', '.btn-add-organization', function (event) {
+      event.preventDefault();
+      var code = document.getElementById("inputCode").value;
+      var name = document.getElementById("inputNameSite").value;
+      
+      if ( code.replace(/\s/g, '') == "", name.replace(/\s/g, '') == "") {
+
+        document.getElementById("ShowMessage").style.display = "block";
+        document.getElementById("ShowMessage").innerHTML = "Vui lòng điền vào ô bắt buộc!";
+        return false;
+      }
+
+      // make POST ajax call
+      $.ajax({
+        type: 'POST',
+        url: "admin/organization",
+        // contentType: 'application/json; charset=utf-8',
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'code': $('#inputCode').val(),
+          'name': $('#inputNameSite').val(),
+          'group': $('#inputGroup').val(),
+          'sign_site':  $('#inputSign').val(),
+          'address':  $('#inputAddress').val(),
+          'number_phone':  $('#inputPhone').val(),
+          'note' : $('#inputNote').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          console.log(data);
+          if (data['type'] == 'success') {
+            $('#addOrganizationForm').trigger('reset');
+            $('#inputGroup').val('').trigger('change');
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          // alert the error if any error occured
+          document.getElementById("ShowMessage").style.display = "block";
+          document.getElementById("ShowMessage").innerHTML = data['message'];
+        }
+      })
+    
+    })
+
+    // get data Organization
+    $(document).on('click', '.btn-get-organization', function(event) {
+      var id = (this.getAttribute('data-id'));
+      console.log(id);
+
+      $.ajax({
+        type: 'GET',
+        url: "admin/update/organization/"+id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': id
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          console.log(data['data_organization']);
+          if (data['type'] == 'success') {
+            $('#editOrganizationForm').trigger('reset');
+            document.getElementById("inputEditId").value  = id;
+            document.getElementById("inputEditCode").value  = data['data_organization']['code'];
+            document.getElementById("inputEditNameSite").value = data['data_organization']['name'];            
+            
+            document.getElementById("inputEditSign").value = data['data_organization']['sign_site'];
+            
+            document.getElementById("inputEditAddress").value = data['data_organization']['address'];
+
+            document.getElementById("inputEditPhone").value = data['data_organization']['number_phone'];
+
+            document.getElementById("inputEditNote").value = data['data_organization']['note'];
+            
+            document.getElementById("inputEditGroup").selectedIndex = 0;
+            document.getElementById("inputEditGroup").value = data['data_organization']['id_group'];
+            // document.getElementById("inputEditGroup").value = data['data_organization']['name_group'];
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowUpdateMessage").style.display = "block";
+          document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      
+      })
+    
+    });
+
+    // post update Organization
+    $(document).on('click', '.btn-update-organization', function(event) {
+      var id = document.getElementById("inputEditId").value;
+      console.log(id);
+      
+      $.ajax({
+        type: 'POST',
+        url: "admin/update/organization/"+id,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'code': $('#inputEditCode').val(),
+          'name': $('#inputEditNameSite').val(),
+          'group': $('#inputEditGroup').val(),
+          'sign_site':  $('#inputEditSign').val(),
+          'address':  $('#inputEditAddress').val(),
+          'number_phone':  $('#inputEditPhone').val(),
+          'note' : $('#inputEditNote').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          document.getElementById("ShowUpdateMessage").style.display = "block";
+          document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+
+//     $('#DeleteOrganization').on('show', function () {
+//       console.log($('.btn-delete-organization').text());
+//       $("#txtA").val($(this).attr('data-id'))
+  
+// })
+
+    // delete Organazion
+    $(document).on('click', '.btn-delete-organization', function(event) {
+      // console.log(event);
+      var id_d = $(this).attr('data-id');
+      // var id_delete = (this.getAttribute('data-id'));
+      // console.log($('.btn-delete-organization').text());
+      // var idA = $(event).attr('data-id');
+      console.log(id_d);
+
+      // document.getElementById("content-name-organization").innerHTML = $('.nameorganization').val();
+      // document.getElementById("content-code-organization").innerHTML = "abc";
+
+      
+      $.ajax({
+        type: 'POST',
+        url: "admin/delete/organization/"+id_delete,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': id_delete,
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowUpdateMessage").style.display = "block";
+            document.getElementById("ShowUpdateMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          document.getElementById("ShowUpdateMessage").style.display = "block";
+          document.getElementById("ShowUpdateMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+</script>
+
+</script>
+{% endblock content %}
+
+{% block js_custom %}
+<script>
+
+
+</script>
+{% endblock js_custom %}

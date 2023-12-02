@@ -1,0 +1,823 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    {% block tittle %}
+    
+    {% endblock tittle %}
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'logo.ico' %}">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-icons/font/bootstrap-icons.css' %}">
+
+  <link rel="stylesheet" href="{% static 'assets/vendor/chart.js/dist/Chart.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/daterangepicker/daterangepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.css' %}">
+
+  <!-- CSS Front Template -->
+
+  <link rel="preload" href="{% static 'assets/css/theme.min.css' %}" data-hs-appearance="default" as="style">
+  <link rel="preload" href="{% static 'assets/css/theme-dark.min.css' %}" data-hs-appearance="dark" as="style">
+  
+  
+    
+  <style data-hs-appearance-onload-styles>
+    *
+    {
+      transition: unset !important;
+    }
+
+    body
+    {
+      opacity: 0;
+    }
+  </style>
+
+  <script>
+  window.hs_config = {"autopath":"@@autopath","deleteLine":"hs-builder:delete","deleteLine:build":"hs-builder:build-delete","deleteLine:dist":"hs-builder:dist-delete","previewMode":false,"startPath":"/index.html","vars":{"themeFont":"https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap","version":"?v=1.0"},"layoutBuilder":{"extend":{"switcherSupport":true},"header":{"layoutMode":"default","containerMode":"container-fluid"},"sidebarLayout":"default"},"themeAppearance":{"layoutSkin":"default","sidebarSkin":"default","styles":{"colors":{"primary":"#377dff","transparent":"transparent","white":"#fff","dark":"132144","gray":{"100":"#f9fafc","900":"#1e2022"}},"font":"Inter"}},"languageDirection":{"lang":"en"},"skipFilesFromBundle":{"dist":["{% static 'assets/js/hs.theme-appearance.js' %}","{% static 'assets/js/hs.theme-appearance-charts.js' %}","{% static 'assets/js/demo.js' %}"],"build":["{% static 'assets/css/theme.css' %}","{% static 'assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js' %}","{% static 'assets/js/demo.js' %}","{% static 'assets/css/theme-dark.css' %}","{% static 'assets/css/docs.css' %}","{% static 'assets/vendor/icon-set/style.css' %}","{% static 'assets/js/hs.theme-appearance.js' %}","{% static 'assets/js/hs.theme-appearance-charts.js' %}","{% static 'node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js' %}","{% static 'assets/js/demo.js' %}"]},"minifyCSSFiles":["{% static 'assets/css/theme.css' %}","{% static 'assets/css/theme-dark.css' %}"],"copyDependencies":{"dist":{"*assets/js/theme-custom.js":""},"build":{"*assets/js/theme-custom.js":"","node_modules/bootstrap-icons/font/*fonts/**":"assets/css"}},"buildFolder":"","replacePathsToCDN":{},"directoryNames":{"src":"./src","dist":"./dist","build":"./build"},"fileNames":{"dist":{"js":"theme.min.js","css":"theme.min.css"},"build":{"css":"theme.min.css","js":"theme.min.js","vendorCSS":"vendor.min.css","vendorJS":"vendor.min.js"}},"fileTypes":"jpg|png|svg|mp4|webm|ogv|json"}
+  window.hs_config.gulpRGBA = (p1) => {
+  const options = p1.split(',')
+  const hex = options[0].toString()
+  const transparent = options[1].toString()
+
+  var c;
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+    c= hex.substring(1).split('');
+    if(c.length== 3){
+      c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+    }
+    c= '0x'+c.join('');
+    return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',' + transparent + ')';
+  }
+  throw new Error('Bad Hex');
+}
+            window.hs_config.gulpDarken = (p1) => {
+  const options = p1.split(',')
+
+  let col = options[0].toString()
+  let amt = -parseInt(options[1])
+  var usePound = false
+
+  if (col[0] == "#") {
+    col = col.slice(1)
+    usePound = true
+  }
+  var num = parseInt(col, 16)
+  var r = (num >> 16) + amt
+  if (r > 255) {
+    r = 255
+  } else if (r < 0) {
+    r = 0
+  }
+  var b = ((num >> 8) & 0x00FF) + amt
+  if (b > 255) {
+    b = 255
+  } else if (b < 0) {
+    b = 0
+  }
+  var g = (num & 0x0000FF) + amt
+  if (g > 255) {
+    g = 255
+  } else if (g < 0) {
+    g = 0
+  }
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+}
+            window.hs_config.gulpLighten = (p1) => {
+  const options = p1.split(',')
+
+  let col = options[0].toString()
+  let amt = parseInt(options[1])
+  var usePound = false
+
+  if (col[0] == "#") {
+    col = col.slice(1)
+    usePound = true
+  }
+  var num = parseInt(col, 16)
+  var r = (num >> 16) + amt
+  if (r > 255) {
+    r = 255
+  } else if (r < 0) {
+    r = 0
+  }
+  var b = ((num >> 8) & 0x00FF) + amt
+  if (b > 255) {
+    b = 255
+  } else if (b < 0) {
+    b = 0
+  }
+  var g = (num & 0x0000FF) + amt
+  if (g > 255) {
+    g = 255
+  } else if (g < 0) {
+    g = 0
+  }
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+}
+            </script>
+  </head>
+
+  <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
+
+    <script src="{% static 'assets/js/hs.theme-appearance.js' %}"></script>
+  
+    <script src="{% static 'assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js' %}"></script>
+    
+    
+    <!-- ========== HEADER ========== -->
+    
+    {% include 'header.html' %}
+
+    <!-- ========== END HEADER ========== -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <!-- Navbar Vertical -->
+    
+    {% include 'navbar.html' %}
+
+    <!-- End Navbar Vertical -->
+    
+    <main id="content" role="main" class="main">
+      <!-- Content -->
+
+      {% block content %}
+      {% endblock content %}
+      <!-- End Content -->
+  
+      <!-- Footer -->
+
+      {% include 'footer.html' %}
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+  
+    <!-- ========== SECONDARY CONTENTS ========== -->
+  
+    
+  
+    <!-- Activity -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasActivityStream" aria-labelledby="offcanvasActivityStreamLabel">
+      <div class="offcanvas-header">
+        <h4 id="offcanvasActivityStreamLabel" class="mb-0">Activity stream</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- Step -->
+        <ul class="step step-icon-sm step-avatar-sm">
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <div class="step-avatar">
+                <img class="step-avatar" src="{% static 'assets/img/160x160/img9.jpg' %}" alt="Image Description">
+              </div>
+  
+              <div class="step-content">
+                <h5 class="mb-1">Iana Robinson</h5>
+  
+                <p class="fs-5 mb-1">Added 2 files to task <a class="text-uppercase" href="#"><i class="bi-journal-bookmark-fill"></i> Fd-7</a></p>
+  
+                <ul class="list-group list-group-sm">
+                  <!-- List Item -->
+                  <li class="list-group-item list-group-item-light">
+                    <div class="row gx-1">
+                      <div class="col-6">
+                        <!-- Media -->
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <img class="avatar avatar-xs" src="{% static 'assets/svg/brands/excel-icon.svg' %}" alt="Image Description">
+                          </div>
+                          <div class="flex-grow-1 text-truncate ms-2">
+                            <span class="d-block fs-6 text-dark text-truncate" title="weekly-reports.xls">weekly-reports.xls</span>
+                            <span class="d-block small text-muted">12kb</span>
+                          </div>
+                        </div>
+                        <!-- End Media -->
+                      </div>
+                      <!-- End Col -->
+  
+                      <div class="col-6">
+                        <!-- Media -->
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <img class="avatar avatar-xs" src="{% static 'assets/svg/brands/word-icon.svg' %}" alt="Image Description">
+                          </div>
+                          <div class="flex-grow-1 text-truncate ms-2">
+                            <span class="d-block fs-6 text-dark text-truncate" title="weekly-reports.xls">weekly-reports.xls</span>
+                            <span class="d-block small text-muted">4kb</span>
+                          </div>
+                        </div>
+                        <!-- End Media -->
+                      </div>
+                      <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+                  </li>
+                  <!-- End List Item -->
+                </ul>
+  
+                <span class="small text-muted text-uppercase">Now</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <span class="step-icon step-icon-soft-dark">B</span>
+  
+              <div class="step-content">
+                <h5 class="mb-1">Bob Dean</h5>
+  
+                <p class="fs-5 mb-1">Marked <a class="text-uppercase" href="#"><i class="bi-journal-bookmark-fill"></i> Fr-6</a> as <span class="badge bg-soft-success text-success rounded-pill"><span class="legend-indicator bg-success"></span>"Completed"</span></p>
+  
+                <span class="small text-muted text-uppercase">Today</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <div class="step-avatar">
+                <img class="step-avatar-img" src="{% static 'assets/img/160x160/img3.jpg' %}" alt="Image Description">
+              </div>
+  
+              <div class="step-content">
+                <h5 class="h5 mb-1">Crane</h5>
+  
+                <p class="fs-5 mb-1">Added 5 card to <a href="#">Payments</a></p>
+  
+                <ul class="list-group list-group-sm">
+                  <li class="list-group-item list-group-item-light">
+                    <div class="row gx-1">
+                      <div class="col">
+                        <img class="img-fluid rounded" src="{% static 'assets/svg/components/card-1.svg' %}" alt="Image Description">
+                      </div>
+                      <div class="col">
+                        <img class="img-fluid rounded" src="{% static 'assets/svg/components/card-2.svg' %}" alt="Image Description">
+                      </div>
+                      <div class="col">
+                        <img class="img-fluid rounded" src="{% static 'assets/svg/components/card-3.svg' %}" alt="Image Description">
+                      </div>
+                      <div class="col-auto align-self-center">
+                        <div class="text-center">
+                          <a href="#">+2</a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+  
+                <span class="small text-muted text-uppercase">May 12</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <span class="step-icon step-icon-soft-info">D</span>
+  
+              <div class="step-content">
+                <h5 class="mb-1">David Lidell</h5>
+  
+                <p class="fs-5 mb-1">Added a new member to Front Dashboard</p>
+  
+                <span class="small text-muted text-uppercase">May 15</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <div class="step-avatar">
+                <img class="step-avatar-img" src="{% static 'assets/img/160x160/img7.jpg' %}" alt="Image Description">
+              </div>
+  
+              <div class="step-content">
+                <h5 class="mb-1">Rachel King</h5>
+  
+                <p class="fs-5 mb-1">Marked <a class="text-uppercase" href="#"><i class="bi-journal-bookmark-fill"></i> Fr-3</a> as <span class="badge bg-soft-success text-success rounded-pill"><span class="legend-indicator bg-success"></span>"Completed"</span></p>
+  
+                <span class="small text-muted text-uppercase">Apr 29</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <div class="step-avatar">
+                <img class="step-avatar-img" src="{% static 'assets/img/160x160/img5.jpg' %}" alt="Image Description">
+              </div>
+  
+              <div class="step-content">
+                <h5 class="mb-1">Finch Hoot</h5>
+  
+                <p class="fs-5 mb-1">Earned a "Top endorsed" <i class="bi-patch-check-fill text-primary"></i> badge</p>
+  
+                <span class="small text-muted text-uppercase">Apr 06</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+  
+          <!-- Step Item -->
+          <li class="step-item">
+            <div class="step-content-wrapper">
+              <span class="step-icon step-icon-soft-primary">
+                <i class="bi-person-fill"></i>
+              </span>
+  
+              <div class="step-content">
+                <h5 class="mb-1">Project status updated</h5>
+  
+                <p class="fs-5 mb-1">Marked <a class="text-uppercase" href="#"><i class="bi-journal-bookmark-fill"></i> Fr-3</a> as <span class="badge bg-soft-primary text-primary rounded-pill"><span class="legend-indicator bg-primary"></span>"In progress"</span></p>
+  
+                <span class="small text-muted text-uppercase">Feb 10</span>
+              </div>
+            </div>
+          </li>
+          <!-- End Step Item -->
+        </ul>
+        <!-- End Step -->
+  
+        <div class="d-grid">
+          <a class="btn btn-white" href="javascript:;">View all <i class="bi-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- End Activity -->
+  
+    <!-- Welcome Message Modal -->
+    <div class="modal fade" id="welcomeMessageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-close">
+            <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm" data-bs-dismiss="modal" aria-label="Close">
+              <i class="bi-x-lg"></i>
+            </button>
+          </div>
+          <!-- End Header -->
+  
+          <!-- Body -->
+          <div class="modal-body p-sm-5">
+            <div class="text-center">
+              <div class="w-75 w-sm-50 mx-auto mb-4">
+                <img class="img-fluid" src="{% static 'assets/svg/illustrations/oc-collaboration.svg' %}" alt="Image Description" data-hs-theme-appearance="default">
+                <img class="img-fluid" src="{% static 'assets/svg/illustrations-light/oc-collaboration.svg' %}" alt="Image Description" data-hs-theme-appearance="dark">
+              </div>
+  
+              <h4 class="h1">Welcome to Front</h4>
+  
+              <p>We're happy to see you in our community.</p>
+            </div>
+          </div>
+          <!-- End Body -->
+  
+          <!-- Footer -->
+          <div class="modal-footer d-block text-center py-sm-5">
+            <small class="text-cap text-muted">Trusted by the world's best teams</small>
+  
+            <div class="w-85 mx-auto">
+              <div class="row justify-content-between">
+                <div class="col">
+                  <img class="img-fluid" src="{% static 'assets/svg/brands/gitlab-gray.svg' %}" alt="Image Description">
+                </div>
+                <div class="col">
+                  <img class="img-fluid" src="{% static 'assets/svg/brands/fitbit-gray.svg' %}" alt="Image Description">
+                </div>
+                <div class="col">
+                  <img class="img-fluid" src="{% static 'assets/svg/brands/flow-xo-gray.svg' %}" alt="Image Description">
+                </div>
+                <div class="col">
+                  <img class="img-fluid" src="{% static 'assets/svg/brands/layar-gray.svg' %}" alt="Image Description">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Footer -->
+        </div>
+      </div>
+    </div>
+  
+    <!-- End Welcome Message Modal -->
+  
+    <!-- Create a new user Modal -->
+    <div class="modal fade" id="inviteUserModal" tabindex="-1" aria-labelledby="inviteUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="inviteUserModalLabel">Invite users</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <!-- Body -->
+          <div class="modal-body">
+            <!-- Form -->
+            <div class="mb-4">
+              <div class="input-group mb-2 mb-sm-0">
+                <input type="text" class="form-control" name="fullName" placeholder="Search name or emails" aria-label="Search name or emails">
+  
+                <div class="input-group-append input-group-append-last-sm-down-none">
+                  <!-- Select -->
+                  <div class="tom-select-custom tom-select-custom-end">
+                    <select class="js-select form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "dropdownWidth": "11rem"
+                            }'>
+                      <option value="guest" selected>Guest</option>
+                      <option value="can edit">Can edit</option>
+                      <option value="can comment">Can comment</option>
+                      <option value="full access">Full access</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
+  
+                  <a class="btn btn-primary d-none d-sm-inline-block" href="javascript:;">Invite</a>
+                </div>
+              </div>
+  
+              <a class="btn btn-primary w-100 d-sm-none" href="javascript:;">Invite</a>
+            </div>
+            <!-- End Form -->
+  
+            <div class="row">
+              <h5 class="col modal-title">Invite users</h5>
+  
+              <div class="col-auto">
+                <a class="d-flex align-items-center small text-body" href="#">
+                  <img class="avatar avatar-xss avatar-4x3 me-2" src="{% static 'assets/svg/brands/gmail-icon.svg' %}" alt="Image Description">
+                  Import contacts
+                </a>
+              </div>
+            </div>
+  
+            <hr class="mt-2">
+  
+            <ul class="list-unstyled list-py-2 mb-0">
+              <!-- List Group Item -->
+              <li>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm avatar-circle">
+                      <img class="avatar-img" src="{% static 'assets/img/160x160/img10.jpg' %}" alt="Image Description">
+                    </div>
+                  </div>
+  
+                  <div class="flex-grow-1 ms-3">
+                    <div class="row align-items-center">
+                      <div class="col-sm">
+                        <h5 class="mb-0">Amanda Harvey <i class="bi-patch-check-fill text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></h5>
+                        <span class="d-block small">amanda@site.com</span>
+                      </div>
+  
+                      <div class="col-sm-auto">
+                        <!-- Select -->
+                        <div class="tom-select-custom tom-select-custom-sm-end">
+                          <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                    "searchInDropdown": false,
+                                    "hideSearch": true,
+                                    "dropdownWidth": "11rem"
+                                  }'>
+                            <option value="guest" selected>Guest</option>
+                            <option value="can edit">Can edit</option>
+                            <option value="can comment">Can comment</option>
+                            <option value="full access">Full access</option>
+                            <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                    </div>
+                    <!-- End Row -->
+                  </div>
+                </div>
+              </li>
+              <!-- End List Group Item -->
+  
+              <!-- List Group Item -->
+              <li>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm avatar-circle">
+                      <img class="avatar-img" src="{% static 'assets/img/160x160/img3.jpg' %}" alt="Image Description">
+                    </div>
+                  </div>
+  
+                  <div class="flex-grow-1 ms-3">
+                    <div class="row align-items-center">
+                      <div class="col-sm">
+                        <h5 class="mb-0">David Harrison</h5>
+                        <span class="d-block small">david@site.com</span>
+                      </div>
+  
+                      <div class="col-sm-auto">
+                        <!-- Select -->
+                        <div class="tom-select-custom tom-select-custom-sm-end">
+                          <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                    "searchInDropdown": false,
+                                    "hideSearch": true,
+                                    "dropdownWidth": "11rem"
+                                  }'>
+                            <option value="guest" selected>Guest</option>
+                            <option value="can edit">Can edit</option>
+                            <option value="can comment">Can comment</option>
+                            <option value="full access">Full access</option>
+                            <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                    </div>
+                    <!-- End Row -->
+                  </div>
+                </div>
+              </li>
+              <!-- End List Group Item -->
+  
+              <!-- List Group Item -->
+              <li>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm avatar-circle">
+                      <img class="avatar-img" src="{% static 'assets/img/160x160/img9.jpg' %}" alt="Image Description">
+                    </div>
+                  </div>
+  
+                  <div class="flex-grow-1 ms-3">
+                    <div class="row align-items-center">
+                      <div class="col-sm">
+                        <h5 class="mb-0">Ella Lauda <i class="bi-patch-check-fill text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></h5>
+                        <span class="d-block small">Markvt@site.com</span>
+                      </div>
+  
+                      <div class="col-sm-auto">
+                        <!-- Select -->
+                        <div class="tom-select-custom tom-select-custom-sm-end">
+                          <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                    "searchInDropdown": false,
+                                    "hideSearch": true,
+                                    "dropdownWidth": "11rem"
+                                  }'>
+                            <option value="guest" selected>Guest</option>
+                            <option value="can edit">Can edit</option>
+                            <option value="can comment">Can comment</option>
+                            <option value="full access">Full access</option>
+                            <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                    </div>
+                    <!-- End Row -->
+                  </div>
+                </div>
+              </li>
+              <!-- End List Group Item -->
+  
+              <!-- List Group Item -->
+              <li>
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm avatar-soft-dark avatar-circle">
+                      <span class="avatar-initials">B</span>
+                    </div>
+                  </div>
+  
+                  <div class="flex-grow-1 ms-3">
+                    <div class="row align-items-center">
+                      <div class="col-sm">
+                        <h5 class="mb-0">Bob Dean</h5>
+                        <span class="d-block small">bob@site.com</span>
+                      </div>
+  
+                      <div class="col-sm-auto">
+                        <!-- Select -->
+                        <div class="tom-select-custom tom-select-custom-sm-end">
+                          <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                    "searchInDropdown": false,
+                                    "hideSearch": true,
+                                    "dropdownWidth": "11rem"
+                                  }'>
+                            <option value="guest" selected>Guest</option>
+                            <option value="can edit">Can edit</option>
+                            <option value="can comment">Can comment</option>
+                            <option value="full access">Full access</option>
+                            <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                    </div>
+                    <!-- End Row -->
+                  </div>
+                </div>
+              </li>
+              <!-- End List Group Item -->
+            </ul>
+          </div>
+          <!-- End Body -->
+  
+          <!-- Footer -->
+          <div class="modal-footer">
+            <div class="row align-items-center flex-grow-1 mx-n2">
+              <div class="col-sm-9 mb-2 mb-sm-0">
+                <input type="hidden" id="inviteUserPublicClipboard" value="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/">
+  
+                <p class="modal-footer-text">The public share <a href="#">link settings</a>
+                  <i class="bi-question-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The public share link allows people to view the project without giving access to full collaboration features."></i>
+                </p>
+              </div>
+  
+              <div class="col-sm-3 text-sm-end">
+                <a class="js-clipboard btn btn-white btn-sm text-nowrap" href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard!" data-hs-clipboard-options='{
+                    "type": "tooltip",
+                    "successText": "Copied!",
+                    "contentTarget": "#inviteUserPublicClipboard",
+                    "container": "#inviteUserModal"
+                   }'>
+                  <i class="bi-link-45deg me-1"></i> Copy link</a>
+              </div>
+            </div>
+          </div>
+          <!-- End Footer -->
+        </div>
+      </div>
+    </div>
+    <!-- End Create a new user Modal -->
+    <!-- ========== END SECONDARY CONTENTS ========== -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // get data Product
+    $(document).on('click', '#navbarNotificationsDropdown', function(event) {
+      $.ajax({
+        type: 'GET',
+        url: "{% url 'list_notification' %}",
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data) {
+            // console.log(data);
+            if (data.length > 0) {
+              document.getElementById("btnNotificationDanger").className = "btn-status btn-sm-status btn-status-danger";
+              }
+      
+            var list_html = '<ul class="list-group list-group-flush navbar-card-list-group">';
+            // var date = new Date();
+            // console.log(date)
+            for(var i=0; i < data.length; i++) {
+              // console.log(data[i]['created_at']);
+              var data_date = data[i]['created_at'];
+              const mydate = new Date(data_date);
+              // console.log(data[i]['is_view']);
+              // var date_notification = mydate.toDateString();
+              var date_notification = mydate.toISOString().slice(0, 10);
+              // console.log(date_notification);
+              if (data[i]['customer'] != null) {
+                if (data[i]['is_view'] == true) {
+                  list_html += 
+                  '<li class="list-group-item form-check-select DataNotification" data-notification='+data[i]['id']+'>'+
+                    '<div class="row">'+
+                      '<div class="col-auto">'+
+                        '<div class="d-flex align-items-center">'+
+                          '<div class="form-check">'+
+                            '<input class="form-check-input" type="checkbox" value="" id="notificationCheck'+data[i]['id']+'">'+
+                            '<label class="form-check-label" for="notificationCheck'+data[i]['id']+'"></label>'+
+                            '<span class="form-check-stretched-bg"></span>'+
+                          '</div>'+
+                          
+                        '</div>'+
+                      '</div>'+
+
+                      '<div class="col ms-n2">'+
+                        '<h5 class="mb-1">'+data[i]['customer']['full_name']+'</h5>'+
+                        '<p class="text-body fs-5">'+data[i]['content']+'</p>'+                          
+                      '</div>'+
+                      '<small class="col-auto text-muted text-cap">'+date_notification+'</small>'+
+                    '</div>'+
+                  '</li>';
+              
+                list_html += "</ul>"
+                $("#notificationNavOne").html(list_html);
+                }
+                else if (data[i]['is_view'] == false) {
+                  list_html += 
+                    '<li class="list-group-item form-check-select DataNotification" data-notification='+data[i]['id']+'>'+
+                      '<div class="row">'+
+                        '<div class="col-auto">'+
+                          '<div class="d-flex align-items-center">'+
+                            '<div class="form-check">'+
+                              '<input class="form-check-input" type="checkbox" value="" id="notificationCheck'+data[i]['id']+'" checked>'+
+                              '<label class="form-check-label" for="notificationCheck'+data[i]['id']+'"></label>'+
+                              '<span class="form-check-stretched-bg"></span>'+
+                            '</div>'+
+                            
+                          '</div>'+
+                        '</div>'+
+
+                        '<div class="col ms-n2">'+
+                          '<h5 class="mb-1">'+data[i]['customer']['full_name']+'</h5>'+
+                          '<p class="text-body fs-5">'+data[i]['content']+'</p>'+                          
+                        '</div>'+
+                        '<small class="col-auto text-muted text-cap">'+date_notification+'</small>'+
+                      '</div>'+
+                    '</li>';
+                
+                    }
+                  list_html += "</ul>"
+                  $("#notificationNavOne").html(list_html);
+                  }
+            }
+        },
+        error: function(data) {
+            console.log('There was a problem');
+        }
+      
+      })
+    
+    });
+
+    $(document).on('click','.DataNotification', function(){
+      var get_id = (this.getAttribute('data-notification'));
+      console.log(get_id);
+
+      $.ajax({
+        type: 'POST',
+        url: "notification/is/view/"+get_id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'notification_id': get_id,
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            var id_check = "notificationCheck"+get_id;
+            // console.log(id_check);
+            document.getElementById(id_check).checked = false;
+          } else {
+            alert(data['message'])
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          alert(data['message'])
+        }
+      })
+    })
+
+</script>
+
+
+<!-- JS Global Compulsory  -->
+<script src="{% static 'assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery-migrate/dist/jquery-migrate.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- JS Implementing Plugins -->
+<script src="{% static 'assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js' %}"></script>
+<script src="{% static 'assets/vendor/hs-form-search/dist/hs-form-search.min.js' %}"></script>
+
+<script src="{% static 'assets/vendor/chart.js/dist/Chart.min.js' %}"></script>
+<script src="{% static 'assets/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js' %}"></script>
+<script src="{% static 'assets/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js' %}"></script>
+<script src="{% static 'assets/vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'assets/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'assets/vendor/tom-select/dist/js/tom-select.complete.min.js' %}"></script>
+<script src="{% static 'assets/vendor/clipboard/dist/clipboard.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables.net.extensions/select/select.min.js' %}"></script>
+<script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script>
+<script src="{% static 'assets/vendor/fslightbox/index.js' %}"></script>
+<!-- JS Front -->
+<script src="{% static 'assets/js/theme.min.js' %}"></script>
+<script src="{% static 'assets/js/hs.theme-appearance-charts.js' %}"></script>
+
+
+
+{% block js_custom %}
+{% endblock js_custom %}
+      
+  </body>
+</html>

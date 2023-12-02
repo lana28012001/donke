@@ -1,0 +1,1157 @@
+{% extends 'base.html' %}
+{% block tittle %}
+  <title>User | Hệ thống quản lý Routine Cecilia Spa</title>
+{% endblock tittle %}
+
+{% load static %}
+
+{% block breadcrumb %} 
+Home
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="content container-fluid">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="page-header-title">User</h1>
+      </div>
+      <!-- End Col -->
+
+      <div class="col-auto">
+        <a class="button-8 btn-primary" id="btn-add" href="javascript:;" data-bs-toggle="modal" data-bs-target="#AddUser">
+          <i class="bi-person-plus-fill me-1"></i>
+        </a>
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+  </div>
+  <!-- End Page Header -->
+
+ 
+
+  <div class="row" style="display:none">
+    <div class="col-lg-5 mb-3 mb-lg-5">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Header -->
+        <div class="card-header card-header-content-between">
+          <h4 class="card-header-title">Import data into Front Dashboard</h4>
+
+          <!-- Dropdown -->
+          <div class="dropdown">
+            <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="reportsOverviewDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi-three-dots-vertical"></i>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="reportsOverviewDropdown2">
+              <span class="dropdown-header">Settings</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-share-fill dropdown-item-icon"></i> Share chart
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-download dropdown-item-icon"></i> Download
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="bi-alt dropdown-item-icon"></i> Connect other apps
+              </a>
+
+              <div class="dropdown-divider"></div>
+
+              <span class="dropdown-header">Feedback</span>
+
+              <a class="dropdown-item" href="#">
+                <i class="bi-chat-left-dots dropdown-item-icon"></i> Report
+              </a>
+            </div>
+          </div>
+          <!-- End Dropdown -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="card-body">
+          <p>See and talk to your users and leads immediately by importing your data into the Front Dashboard platform.</p>
+
+          <ul class="list-group list-group-flush list-group-no-gutters">
+            <li class="list-group-item">
+              <h5 class="card-title">Import users from:</h5>
+            </li>
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/capsule-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Capsule</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/mailchimp-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Mailchimp</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <!-- List Group Item -->
+            <li class="list-group-item">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="avatar avatar-xs avatar-4x3" src="{% static 'assets/svg/brands/google-webdev-icon.svg' %}" alt="Image Description">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h5 class="mb-0">Webdev</h5>
+                      <span class="d-block fs-6 text-body">Users</span>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-auto">
+                      <a class="btn btn-primary btn-sm" href="#" title="Launch importer" target="_blank">
+                        Launch <span class="d-none d-sm-inline-block">importer</span>
+                        <i class="bi-box-arrow-up-right ms-1"></i>
+                      </a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+              </div>
+            </li>
+            <!-- End List Group Item -->
+
+            <li class="list-group-item"><span class="small text-muted">Or you can <a class="link" href="#">sync data to Front Dashboard</a> to ensure your data is always up-to-date.</span></li>
+          </ul>
+        </div>
+        <!-- End Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+    <!-- End Col -->
+
+    <div class="col-lg-7 mb-3 mb-lg-5">
+      <!-- Card -->
+      <div class="card h-100">
+        <!-- Header -->
+        <div class="card-header card-header-content-sm-between">
+          <h4 class="card-header-title mb-2 mb-sm-0">Monthly expenses</h4>
+
+          <!-- Nav -->
+          <ul class="nav nav-segment nav-fill" id="expensesTab" role="tablist">
+            <li class="nav-item" data-bs-toggle="chart-bar" data-datasets="thisWeek" data-trigger="click" data-action="toggle">
+              <a class="nav-link active" href="javascript:;" data-bs-toggle="tab">This week</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="chart-bar" data-datasets="lastWeek" data-trigger="click" data-action="toggle">
+              <a class="nav-link" href="javascript:;" data-bs-toggle="tab">Last week</a>
+            </li>
+          </ul>
+          <!-- End Nav -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-sm mb-2 mb-sm-0">
+              <div class="d-flex align-items-center">
+                <span class="h1 mb-0">35%</span>
+                <span class="text-success ms-2">
+                  <i class="bi-graph-up"></i> 25.3%
+                </span>
+              </div>
+            </div>
+            <!-- End Col -->
+
+            <div class="col-sm-auto align-self-sm-end">
+              <div class="row fs-6 text-body">
+                <div class="col-auto">
+                  <span class="legend-indicator bg-primary"></span> New
+                </div>
+                <!-- End Col -->
+
+                <div class="col-auto">
+                  <span class="legend-indicator"></span> Overdue
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+          <!-- Bar Chart -->
+          <div class="chartjs-custom">
+            <canvas id="updatingBarChart" style="height: 20rem;" data-hs-chartjs-options='{
+                      "type": "bar",
+                      "data": {
+                        "labels": ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"],
+                        "datasets": [{
+                          "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
+                          "backgroundColor": "#377dff",
+                          "hoverBackgroundColor": "#377dff",
+                          "borderColor": "#377dff"
+                        },
+                        {
+                          "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
+                          "backgroundColor": "#e7eaf3",
+                          "borderColor": "#e7eaf3"
+                        }]
+                      },
+                      "options": {
+                        "scales": {
+                          "yAxes": [{
+                            "gridLines": {
+                              "color": "#e7eaf3",
+                              "drawBorder": false,
+                              "zeroLineColor": "#e7eaf3"
+                            },
+                            "ticks": {
+                              "beginAtZero": true,
+                              "stepSize": 100,
+                              "fontSize": 12,
+                              "fontColor":  "#97a4af",
+                              "fontFamily": "Open Sans, sans-serif",
+                              "padding": 10,
+                              "postfix": "$"
+                            }
+                          }],
+                          "xAxes": [{
+                            "gridLines": {
+                              "display": false,
+                              "drawBorder": false
+                            },
+                            "ticks": {
+                              "fontSize": 12,
+                              "fontColor":  "#97a4af",
+                              "fontFamily": "Open Sans, sans-serif",
+                              "padding": 5
+                            },
+                            "categoryPercentage": 0.5,
+                            "maxBarThickness": "10"
+                          }]
+                        },
+                        "cornerRadius": 2,
+                        "tooltips": {
+                          "prefix": "$",
+                          "hasIndicator": true,
+                          "mode": "index",
+                          "intersect": false
+                        },
+                        "hover": {
+                          "mode": "nearest",
+                          "intersect": true
+                        }
+                      }
+                    }'></canvas>
+          </div>
+          <!-- End Bar Chart -->
+        </div>
+        <!-- End Body -->
+      </div>
+      <!-- End Card -->
+    </div>
+    <!-- End Col -->
+  </div>
+  <!-- End Row -->
+
+  <!-- Card -->
+  <div class="card mb-3 mb-lg-5">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="row justify-content-between align-items-center flex-grow-1">
+        <div class="col-md">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-header-title">User</h4>
+
+           
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-auto">
+          <!-- Filter -->
+          <div class="row align-items-sm-center">
+
+
+            <div class="col-md">
+              <form>
+                <!-- Search -->
+                <div class="input-group input-group-merge input-group-flush">
+                  <div class="input-group-prepend input-group-text">
+                    <i class="bi-search"></i>
+                  </div>
+                  <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Tìm kiếm...">
+                </div>
+                <!-- End Search -->
+              </form>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Filter -->
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Header -->
+
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+      <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+               "columnDefs": [{
+                  "targets": [5],
+                  "orderable": false
+                }],
+               "order": [],
+               "info": {
+                 "totalQty": "#datatableWithPaginationInfoTotalQty"
+               },
+               "search": "#datatableSearch",
+               "entries": "#datatableEntries",
+               "pageLength": 8,
+               "isResponsive": false,
+               "isShowPaging": false,
+               "pagination": "datatablePagination"
+             }'>
+        <thead class="thead-light">
+          <tr>
+            <th>STT</th>
+            <th>Username</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Địa chỉ</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for user in list_user %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+           
+            <td>
+              {{ user.username }}
+            </td>
+            <td>{{ user.phonenumber }} </td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.address }}</td>
+            <td>
+              <a class="btn btn-sm btn-primary btn-edit-user" href="javascript:;"  title="Cập nhật" data-bs-toggle="modal" data-bs-target="#EditUser" data-id-user="{{ user.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+              <a class="btn btn-sm btn-danger" href="/manage/delete/user/{{ user.id }}" title="Xóa"  delete-id-user="{{ user.id }}">
+                <i class="bi bi-trash"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          
+
+          
+        </tbody>
+      </table>
+    </div>
+    <!-- End Table -->
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <!-- Pagination -->
+      <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+        <div class="col-sm mb-2 mb-sm-0">
+          <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+            <span class="me-2">Hiển thị:</span>
+
+            <!-- Select -->
+            <div class="tom-select-custom">
+              <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
+                        "searchInDropdown": false,
+                        "hideSearch": true
+                      }'>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8" selected>8</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <!-- End Select -->
+
+            <span class="text-secondary me-2">của</span>
+
+            <!-- Pagination Quantity -->
+            <span id="datatableWithPaginationInfoTotalQty"></span>
+          </div>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm-auto">
+          <div class="d-flex justify-content-center justify-content-sm-end">
+            <!-- Pagination -->
+            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+          </div>
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End Card -->
+
+
+</div>
+
+
+<!-- Add User -->
+<div class="modal fade" id="AddUser" tabindex="-1" aria-labelledby="AddUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddUserLabel">Thêm mới User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <div class="js-nav-scroller hs-nav-scroller-horizontal">
+          <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-left"></i>
+            </a>
+          </span>
+
+          <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-right"></i>
+            </a>
+          </span>
+
+          
+        </div>
+        <!-- End Nav Scroller -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="AddCustommerTabContent">
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="UserForm">
+
+            
+              <!-- Form Username-->
+              <div class="row mb-4">
+                <label for="inputUsername" class="col-sm-3 col-form-label form-label">Username <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" name="product"  id="inputUsername" placeholder="Username" aria-label="Username" autocomplete="off" >
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Username-->
+
+              <!-- Form Password-->
+              <div class="row mb-4">
+                <label for="inputPassword1" class="col-sm-3 col-form-label form-label">Password <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="password" class="form-control" name="password1"  id="inputPassword1" placeholder="Mật khẩu" aria-label="Password1" autocomplete="off" >
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Password-->
+
+              <!-- Form Password2-->
+              <div class="row mb-4">
+                <label for="inputPassword2" class="col-sm-3 col-form-label form-label">Password <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="password" class="form-control" name="password2"  id="inputPassword2" placeholder="Xác nhận mật khẩu" aria-label="Password2" autocomplete="off" >
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Password2-->
+
+              <!-- Form SĐT-->
+              <div class="row mb-4">
+                <label for="inputPhone" class="col-sm-3 col-form-label form-label">SĐT <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" name="phonenumber"  id="inputPhone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;"  placeholder="SĐT" aria-label="SĐT">
+                </div>
+              </div>
+              <!-- End Form SĐT-->
+
+              <!-- Form Email -->
+              <div class="row mb-4">
+                <label for="inputEmail" class="col-sm-3 col-form-label form-label">Email </label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="email" class="js-masked-input form-control" name="note" id="inputEmail"  placeholder="Email " aria-label="Email ">
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Email-->
+
+              
+
+              <!-- Form Địa chỉ-->
+              <div class="row mb-4">
+                <label for="inputAddress" class="col-sm-3 col-form-label form-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" name="address" id="inputAddress" onKeyPress="if(this.value.length==255) return false;"  placeholder="Địa chỉ" aria-label="Địa chỉ">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Địa chỉ-->
+              <div class="alert alert-danger" role="alert" id="ShowMessage" style="display: None;">
+                
+              </div>
+
+              <div class="alert alert-success" role="alert" id="ShowMessageSuccess" style="display: None;">
+                
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <div class="d-flex gap-3">
+                  <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                  <button type="button" class="btn btn-primary btn-add-user">Lưu</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- End Add User -->
+
+<!-- Edit User -->
+<div class="modal fade" id="EditUser" tabindex="-1" aria-labelledby="EditUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditUserLabel">Chỉnh sửa User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <div class="js-nav-scroller hs-nav-scroller-horizontal">
+          <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-left"></i>
+            </a>
+          </span>
+
+          <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+              <i class="bi-chevron-right"></i>
+            </a>
+          </span>
+
+          
+        </div>
+        <!-- End Nav Scroller -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="AddCustommerTabContent">
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <form id="UserEdiForm">
+
+              <input type="text" style="display: None;" id="inputEditId" value="">
+            
+              <!-- Form Username-->
+              <div class="row mb-4">
+                <label for="inputEditUsername" class="col-sm-3 col-form-label form-label">Username <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control"  id="inputEditUsername" readonly disabled>
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Username-->
+
+              <!-- Form SĐT-->
+              <div class="row mb-4">
+                <label for="inputEditPhone" class="col-sm-3 col-form-label form-label">SĐT <span class="form-label-secondary">*</span></label>
+
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" name="phonenumber"  id="inputEditPhone" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==13) return false;"  placeholder="SĐT" aria-label="SĐT">
+                </div>
+              </div>
+              <!-- End Form SĐT-->
+
+              <!-- Form Email -->
+              <div class="row mb-4">
+                <label for="inputEditEmail" class="col-sm-3 col-form-label form-label">Email </label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="email" class="js-masked-input form-control" name="note" id="inputEditEmail"  placeholder="Email " aria-label="Email ">
+                    
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Email-->
+
+              
+
+              <!-- Form Địa chỉ-->
+              <div class="row mb-4">
+                <label for="inputEditAddress" class="col-sm-3 col-form-label form-label">Địa chỉ</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group input-group-sm-vertical">
+                    <input type="text" class="form-control" name="address" id="inputEditAddress" onKeyPress="if(this.value.length==255) return false;"  placeholder="Địa chỉ" aria-label="Địa chỉ">
+                  </div>
+                </div>
+              </div>
+              <!-- End Form Địa chỉ-->
+              <div class="alert alert-danger" role="alert" id="ShowEditMessage" style="display: None;">
+                
+              </div>
+
+              <div class="alert alert-success" role="alert" id="ShowEditMessageSuccess" style="display: None;">
+                
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <div class="d-flex gap-3">
+                  <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Hủy</button>
+                  <button type="button" class="btn btn-primary btn-update-user">Lưu</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          
+        </div>
+        <!-- End Tab Content -->
+      </div>
+      <!-- End Body -->
+    </div>
+  </div>
+</div>
+<!-- Edit Add User -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // save User
+    $(document).on('click', '.btn-add-user', function(event) {
+      event.preventDefault();
+      var username = document.getElementById("inputUsername").value;
+      var inputPassword1 = document.getElementById("inputPassword1").value;
+      var inputPassword2 = document.getElementById("inputPassword2").value;
+      var sdt = document.getElementById("inputPhone").value;
+        // console.log(product);
+        // console.log(tacdung);
+        // console.log(dosage);
+        // console.log(note);
+
+      if ( username.replace(/\s/g, '') == '' || inputPassword1.replace(/\s/g, '') == '' || inputPassword2.replace(/\s/g, '') == '' || sdt.replace(/\s/g, '')== ''){
+
+        document.getElementById("ShowMessage").style.display = "block";
+        document.getElementById("ShowMessage").innerHTML = "Vui lòng điền vào ô bắt buộc!";
+        return false;
+      }
+      // document.getElementById("btnAddUser").disabled = true;
+      // make POST ajax call
+      $.ajax({
+        type: 'POST',
+        url: "manage/user",
+        // contentType: 'application/json; charset=utf-8',
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'username': $('#inputUsername').val(),
+          'password1':$('#inputPassword1').val(),
+          'password2':$('#inputPassword2').val(),
+          'phonenumber': $('#inputPhone').val(),
+          'email': $('#inputEmail').val(),
+          'address': $('#inputEmail').val(),
+
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          // console.log(data);
+          if (data['type'] == 'success') {
+            $('#UserForm').trigger('reset');
+            document.getElementById("ShowMessage").style.display = "none";
+
+            document.getElementById("ShowMessageSuccess").style.display = "block";
+            document.getElementById("ShowMessageSuccess").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowMessage").style.display = "block";
+            document.getElementById("ShowMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          // alert the error if any error occured
+          document.getElementById("ShowMessage").style.display = "block";
+          document.getElementById("ShowMessage").innerHTML = data['message'];
+        }
+      })
+    
+    })
+
+    // get data User
+    $(document).on('click', '.btn-edit-user', function(event) {
+      var get_id = (this.getAttribute('data-id-user'));
+      // console.log(get_id);
+
+      $.ajax({
+        type: 'GET',
+        url: "manage/update/user/"+get_id,
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': get_id
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          // on successfull creating object
+          // console.log(data['data_user']);
+          if (data['type'] == 'success') {
+            $('#UserEdiForm').trigger('reset');
+            
+            document.getElementById("inputEditId").value = get_id;
+            document.getElementById("inputEditUsername").value = data['data_user']['username'];
+            document.getElementById("inputEditPhone").value = data['data_user']['phonenumber'];
+            document.getElementById("inputEditEmail").value = data['data_user']['email']; 
+            document.getElementById("inputEditAddress").value = data['data_user']['address']; 
+
+          } else {
+            document.getElementById("ShowEditMessage").style.display = "block";
+            document.getElementById("ShowEditMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (response) {
+          document.getElementById("ShowEditMessage").style.display = "block";
+          document.getElementById("ShowEditMessage").innerHTML = data['message'];
+        }
+      
+      })
+    
+    });
+
+    // post update User
+    $(document).on('click', '.btn-update-user', function(event) {
+      var edit_id = document.getElementById("inputEditId").value;
+      // console.log(edit_id);
+      
+      $.ajax({
+        type: 'POST',
+        url: "manage/update/user/"+edit_id,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'phonenumber': $('#inputEditPhone').val(),
+          'email': $('#inputEditEmail').val(),
+          'address':  $('#inputEditAddress').val(),
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            // $('#EditCustomerForm').trigger('reset');
+            document.getElementById("ShowEditMessage").style.display = "none";
+
+            document.getElementById("ShowEditMessageSuccess").style.display = "block";
+            document.getElementById("ShowEditMessageSuccess").innerHTML = data['message'];
+            window.location.reload();
+
+          } else {
+            document.getElementById("ShowEditMessage").style.display = "block";
+            document.getElementById("ShowEditMessage").innerHTML =  data['message'];
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          document.getElementById("ShowEditMessage").style.display = "block";
+          document.getElementById("ShowEditMessage").innerHTML = data['message'];
+        }
+      })
+
+
+    });
+
+
+    // delete User
+    $(document).on('click', '.', function(event) {
+      var id_delete = $(this).attr('delete-id-user');
+      // console.log(id_delete);
+
+
+      $.ajax({
+        type: 'POST',
+        url: "manage/delete/user/"+id_delete,
+
+        data: {
+          'csrfmiddlewaretoken': '{{csrf_token}}',
+          'id': id_delete,
+          },
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        success: function (data, textStatus, xhr) {
+          if (data['type'] == 'success') {
+            alert(data['message'])
+            window.location.reload();
+
+          } else {
+            alert(data['message'])
+
+          }
+
+        },
+        error: function (data, textStatus, xhr) {
+          alert(data['message'])
+        }
+      })
+
+
+    });
+
+</script>
+
+
+{% endblock content %}
+{% block js_custom %}
+
+<!-- JS Plugins Init. -->
+<script>
+  $(document).on('ready', function () {
+    // INITIALIZATION OF DATERANGEPICKER
+    // =======================================================
+    $('.js-daterangepicker').daterangepicker();
+
+    $('.js-daterangepicker-times').daterangepicker({
+      timePicker: true,
+      startDate: moment().startOf('hour'),
+      endDate: moment().startOf('hour').add(32, 'hour'),
+      locale: {
+        format: 'M/DD hh:mm A'
+      }
+    });
+
+    var start = moment();
+    var end = moment();
+
+    function cb(start, end) {
+      $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
+    }
+
+    $('#js-daterangepicker-predefined').daterangepicker({
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    }, cb);
+
+    cb(start, end);
+  });
+
+
+  // INITIALIZATION OF DATATABLES
+  // =======================================================
+  HSCore.components.HSDatatables.init($('#datatable'), {
+    select: {
+      style: 'multi',
+      selector: 'td:first-child input[type="checkbox"]',
+      classMap: {
+        checkAll: '#datatableCheckAll',
+        counter: '#datatableCounter',
+        counterInfo: '#datatableCounterInfo'
+      }
+    },
+    language: {
+      zeroRecords: `<div class="text-center p-4">
+            <img class="mb-3" src="{% static 'assets/svg/illustrations/oc-error.svg' %}" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="default">
+            <img class="mb-3" src="{% static 'assets/svg/illustrations-light/oc-error.svg' %}" alt="Image Description" style="width: 10rem;" data-hs-theme-appearance="dark">
+          <p class="mb-0">Không có dữ liệu</p>
+          </div>`
+    }
+  });
+
+  const datatable = HSCore.components.HSDatatables.getItem(0)
+
+  document.querySelectorAll('.js-datatable-filter').forEach(function (item) {
+    item.addEventListener('change',function(e) {
+      const elVal = e.target.value,
+  targetColumnIndex = e.target.getAttribute('data-target-column-index'),
+  targetTable = e.target.getAttribute('data-target-table');
+
+  HSCore.components.HSDatatables.getItem(targetTable).column(targetColumnIndex).search(elVal !== 'null' ? elVal : '').draw()
+    })
+  })
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  });
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function () {
+    // INITIALIZATION OF DATATABLES
+    // =======================================================
+    HSCore.components.HSDatatables.init('.js-datatable')
+  })()
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+    window.onload = function () {
+      
+
+      // INITIALIZATION OF NAVBAR VERTICAL ASIDE
+      // =======================================================
+      new HSSideNav('.js-navbar-vertical-aside').init()
+
+
+      // INITIALIZATION OF FORM SEARCH
+      // =======================================================
+      const HSFormSearchInstance = new HSFormSearch('.js-form-search')
+
+      if (HSFormSearchInstance.collection.length) {
+        HSFormSearchInstance.getItem(1).on('close', function (el) {
+          el.classList.remove('top-0')
+        })
+
+        document.querySelector('.js-form-search-mobile-toggle').addEventListener('click', e => {
+          let dataOptions = JSON.parse(e.currentTarget.getAttribute('data-hs-form-search-options')),
+            $menu = document.querySelector(dataOptions.dropMenuElement)
+
+          $menu.classList.add('top-0')
+          $menu.style.left = 0
+        })
+      }
+
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init()
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      Chart.plugins.unregister(ChartDataLabels);
+      HSCore.components.HSChartJS.init('.js-chart')
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      HSCore.components.HSChartJS.init('#updatingBarChart')
+      const updatingBarChart = HSCore.components.HSChartJS.getItem('updatingBarChart')
+
+      // Call when tab is clicked
+      document.querySelectorAll('[data-bs-toggle="chart-bar"]').forEach(item => {
+        item.addEventListener('click', e => {
+          let keyDataset = e.currentTarget.getAttribute('data-datasets')
+
+          const styles = HSCore.components.HSChartJS.getTheme('updatingBarChart', HSThemeAppearance.getAppearance())
+
+          if (keyDataset === 'lastWeek') {
+            updatingBarChart.data.labels = ["Apr 22", "Apr 23", "Apr 24", "Apr 25", "Apr 26", "Apr 27", "Apr 28", "Apr 29", "Apr 30", "Apr 31"];
+            updatingBarChart.data.datasets = [
+              {
+                "data": [120, 250, 300, 200, 300, 290, 350, 100, 125, 320],
+                "backgroundColor": styles.data.datasets[0].backgroundColor,
+                "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
+                "borderColor": styles.data.datasets[0].borderColor
+              },
+              {
+                "data": [250, 130, 322, 144, 129, 300, 260, 120, 260, 245, 110],
+                "backgroundColor": styles.data.datasets[1].backgroundColor,
+                "borderColor": styles.data.datasets[1].borderColor
+              }
+            ];
+            updatingBarChart.update();
+          } else {
+            updatingBarChart.data.labels = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
+            updatingBarChart.data.datasets = [
+              {
+                "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
+                "backgroundColor": styles.data.datasets[0].backgroundColor,
+                "hoverBackgroundColor": styles.data.datasets[0].hoverBackgroundColor,
+                "borderColor": styles.data.datasets[0].borderColor
+              },
+              {
+                "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
+                "backgroundColor": styles.data.datasets[1].backgroundColor,
+                "borderColor": styles.data.datasets[1].borderColor
+              }
+            ]
+            updatingBarChart.update();
+          }
+        })
+      })
+
+
+      // INITIALIZATION OF CHARTJS
+      // =======================================================
+      HSCore.components.HSChartJS.init('.js-chart-datalabels', {
+        plugins: [ChartDataLabels],
+        options: {
+          plugins: {
+            datalabels: {
+              anchor: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? 'end' : 'center';
+              },
+              align: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? 'end' : 'center';
+              },
+              color: function (context) {
+                var value = context.dataset.data[context.dataIndex];
+                return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
+              },
+              font: function (context) {
+                var value = context.dataset.data[context.dataIndex],
+                  fontSize = 25;
+
+                if (value.r > 50) {
+                  fontSize = 35;
+                }
+
+                if (value.r > 70) {
+                  fontSize = 55;
+                }
+
+                return {
+                  weight: 'lighter',
+                  size: fontSize
+                };
+              },
+              offset: 2,
+              padding: 0
+            }
+          }
+        }
+      })
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init('.js-select')
+
+
+      // INITIALIZATION OF CLIPBOARD
+      // =======================================================
+      HSCore.components.HSClipboard.init('.js-clipboard')
+    }
+  })()
+</script>
+
+<!-- Style Switcher JS -->
+<script>
+    (function () {
+      // STYLE SWITCHER
+      // =======================================================
+      const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
+      const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
+      // Function to set active style in the dorpdown menu and set icon for dropdown trigger
+      const setActiveStyle = function () {
+        $variants.forEach($item => {
+          if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
+            $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
+            return $item.classList.add('active')
+          }
+
+          $item.classList.remove('active')
+        })
+      }
+
+      // Add a click event to all items of the dropdown to set the style
+      $variants.forEach(function ($item) {
+        $item.addEventListener('click', function () {
+          HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
+        })
+      })
+
+      // Call the setActiveStyle on load page
+      setActiveStyle()
+
+      // Add event listener on change style to call the setActiveStyle function
+      window.addEventListener('on-hs-appearance-change', function () {
+        setActiveStyle()
+      })
+    })()
+  </script>
+
+<!-- End Style Switcher JS -->
+{% endblock js_custom %}
