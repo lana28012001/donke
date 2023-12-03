@@ -164,18 +164,19 @@ Home
                                         </td>
 
                                         <td>
-                                            <a class="button-8" title="Xóa" type="button">Xóa hàng
+                                            <a class="btn btn-sm btn-danger " title="Xóa" type="button">Xóa hàng
 
                                             </a>
-                                            <a class="button-8" id="btnProduct">
+                                            <a class="btn btn-primary" id="btnProduct">
                                                 <i class="bi-person-plus-fill me-1"></i> Thêm hàng
                                             </a>
+
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             {% comment %} <div class="col-auto">
-                                <a class="button-8" id="btnProduct">
+                                <a class="btn btn-primary" id="btnProduct">
                                     <i class="bi-person-plus-fill me-1"></i> Thêm hàng
                                 </a>
                             </div> {% endcomment %}
@@ -240,11 +241,11 @@ Home
                                                  autocomplete="off"> </td>
 
                                         <td>
-                                            <a class="button-8" href="javascript:;" type="button"
+                                            <a class="btn btn-sm btn-danger" href="javascript:;" type="button"
                                                 title="Xóa"> Xóa hàng
 
                                             </a>
-                                            <a class="button-8" href="javascript:;" id="btnService">
+                                            <a class="btn btn-primary" href="javascript:;" id="btnService">
                                                 <i class="bi-person-plus-fill me-1"></i> Thêm hàng
                                             </a>
                                         </td>
@@ -384,7 +385,7 @@ Home
 
 
             <div class="d-grid gap-2">
-                <button class="button-8" type="submit">Lưu</button>
+                <button class="btn btn-primary" type="submit">Lưu</button>
             </div>
         </form>
     </div>
@@ -404,7 +405,7 @@ Home
     $('#btnProduct').click(function () {
         var countRow = $('#datatableProduct tr').length;
 
-        $('#datatableProduct').append('<tr>  <td class="inputProduct"> <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/"   autocomplete="off" required> </td>  <td class="inputProduct"> <div class="tom-select-custom">  <select class="js-select form-select"  name="day-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{    "placeholder": "Chọn..."    }" required>  <option value="">Chọn...</option>  {% for d in list_day %}    <option value="{{ d.id }}">{{ d.day }}</option>    {% endfor %}  </select>  </div> </td>  <td class="inputProduct">   <div class="tom-select-custom">  <select class="js-select form-select"  name="product-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{    "placeholder": "Chọn..."   }">   <option value="">Chọn...</option>   {% for po in list_product %}  <option value="{{ po.id }}">{{ po.product }}</option>  {% endfor %}   </select>  </div>   </td>  <td> <div class="tom-select-custom">  <select class="js-select form-select"  name="buoi-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{   "placeholder": "Chọn..."     }" required>  <option value="">Chọn...</option>   {% for b in list_buoi %}   <option value="{{ b.id }}">{{ b.buoi }}</option>    {% endfor %}   </select>   </div> </td> <td> <a class="button-8" title="Xóa" type="button">Xóa hàng   </a>     </td>  </tr>')
+        $('#datatableProduct').append('<tr>  <td class="inputProduct"> <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/"   autocomplete="off" required> </td>  <td class="inputProduct"> <div class="tom-select-custom">  <select class="js-select form-select"  name="day-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{    "placeholder": "Chọn..."    }" required>  <option value="">Chọn...</option>  {% for d in list_day %}    <option value="{{ d.id }}">{{ d.day }}</option>    {% endfor %}  </select>  </div> </td>  <td class="inputProduct">   <div class="tom-select-custom">  <select class="js-select form-select"  name="product-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{    "placeholder": "Chọn..."   }">   <option value="">Chọn...</option>   {% for po in list_product %}  <option value="{{ po.id }}">{{ po.product }}</option>  {% endfor %}   </select>  </div>   </td>  <td> <div class="tom-select-custom">  <select class="js-select form-select"  name="buoi-' + countRow + '" autocomplete="off"   data-hs-tom-select-options="{   "placeholder": "Chọn..."     }" required>  <option value="">Chọn...</option>   {% for b in list_buoi %}   <option value="{{ b.id }}">{{ b.buoi }}</option>    {% endfor %}   </select>   </div> </td> <td> <a class="btn btn-sm btn-danger" title="Xóa" type="button">Xóa hàng   </a>     </td>  </tr>')
 
     });
 
@@ -415,7 +416,7 @@ Home
     $('#btnService').click(function () {
         var countRow = $('#datatableService tr').length;
 
-        $('#datatableService').append('<tr>  <td> <div class="tom-select-custom"> <select class="js-select form-select" name="service-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{   "placeholder": "Chọn..."  }">  <option value="">Chọn...</option>  {% for se in list_service %}  <option value="{{ se.id }}">{{ se.service }}</option> {% endfor %}   </select>   </div>   </td>   <td> <input type="time" name="time-' + countRow + '" class="form-control"  autocomplete="off"> </td>  <td> <input type="text" name="note-' + countRow + '" class="form-control"  autocomplete="off"> </td> <td>  <a class="button-8" href="javascript:;" type="button"  title="Xóa"> Xóa hàng     </a>  </td>   </tr>')
+        $('#datatableService').append('<tr>  <td> <div class="tom-select-custom"> <select class="js-select form-select" name="service-' + countRow + '" autocomplete="off"  data-hs-tom-select-options="{   "placeholder": "Chọn..."  }">  <option value="">Chọn...</option>  {% for se in list_service %}  <option value="{{ se.id }}">{{ se.service }}</option> {% endfor %}   </select>   </div>   </td>   <td> <input type="time" name="time-' + countRow + '" class="form-control"  autocomplete="off"> </td>  <td> <input type="text" name="note-' + countRow + '" class="form-control"  autocomplete="off"> </td> <td>  <a class="btn btn-sm btn-danger" href="javascript:;" type="button"  title="Xóa"> Xóa hàng     </a>  </td>   </tr>')
 
     });
 
