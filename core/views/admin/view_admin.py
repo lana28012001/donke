@@ -17,7 +17,6 @@
 #             username = request.POST['username']
 #             email = request.POST['email']
 #             phonenumber = request.POST['phonenumber']
-
 #             new_user = User.objects.create(username=username, password=make_password(username), email= email, phonenumber = phonenumber )
 #             messages.success(request, 'Thêm User thành công!')
 #             return redirect('manageuser')

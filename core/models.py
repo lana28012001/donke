@@ -22,14 +22,12 @@ class UserAccount(AbstractUser):
         ['Khác/Không trả lời', 'Khác/Không trả lời']
     ]
    
-    # username = models.CharField(max_length=255, unique = True,)
-    # password = models.CharField(max_length=100)
     gender = models.CharField(max_length=255,choices=gender_choices,blank=True,null=True, verbose_name='Giới tính')
     address = models.CharField(max_length=255, default='',blank=True,null=True, verbose_name='Địa chỉ')
     phonenumber = models.CharField(max_length=15,blank=True,null=True, verbose_name='Số điện thoại')
     dateofbirth = models.CharField(max_length=10,default='',blank=True,null=True, verbose_name = 'Ngày sinh')
     email = models.CharField(max_length=255,blank=True,null=True,verbose_name='Email address')
-    # is_active = models.BooleanField(default=True,blank=True)
+
     is_lock = models.BooleanField(default=False, blank=True)
     
     def save(self, *args, **kwargs):
@@ -73,8 +71,6 @@ class Product(TimeStampedModelMixin):
     """
     product = models.CharField(max_length=255,blank=False, null=False, verbose_name='Tên sản phẩm')
     price = models.IntegerField(blank=False, null=False, verbose_name='Giá')
-    # fit = models.CharField(max_length=1024, blank=True, null= True, verbose_name='Phù hợp da')
-    # compare = models.CharField(max_length=1024, blank=True, null= True, verbose_name='So sánh')
     function = models.CharField(max_length=1024, blank=False, null=False, verbose_name='Công dụng')
     dosage = models.CharField(max_length=255, blank=False, null=False, verbose_name='Tần suất sử dụng')
     keyword = models.CharField(max_length=255, blank=False, null=False, verbose_name='Từ khóa Routine')
@@ -141,7 +137,6 @@ class Customer(TimeStampedModelMixin):
     status = models.ForeignKey(TypeStatus,on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Tình trạng khách hàng')
     type = models.ForeignKey(TypeCustommer,on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Nhóm khách hàng')
     note = models.CharField(max_length=1024, blank=True, null=True, verbose_name='Ghi chú khách hàng')
-    # image_profile = models.FileField(upload_to='images customer',null=True, blank=True, verbose_name='Hình ảnh hồ sơ')
 
     class Meta:
         verbose_name_plural = '07. Khách Hàng'

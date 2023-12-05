@@ -500,9 +500,9 @@ def Home_Export_Excel1(request):
         cell_format2 = workbook.add_format({'border': 1,'text_wrap':True,'font_size':16,'font':'Arial','align': 'center'})
 
         worksheet = workbook.add_worksheet()
-        worksheet.merge_range('A1:G1', "NK Spa & Academy", workbook.add_format({'bold': True,'font_size':16,'align': 'center','font':'Arial'}))
-        worksheet.merge_range('A2:G2', "Số 04C, Đường D5, Khu TTTM - DV Phố Đi Bộ Bạch Đằng, Thủ Dầu Một, Bình Dương", workbook.add_format({'font_size':16,'align': 'center','font':'Arial'}))
-        worksheet.merge_range('A3:G3', "SDT: 0946 68 68 39 - Website: https://nkspa.vn/ ", workbook.add_format({'font_size':16,'align': 'center','font':'Arial'}))
+        worksheet.merge_range('A1:G1', "Cecilia Spa", workbook.add_format({'bold': True,'font_size':16,'align': 'center','font':'Arial'}))
+        worksheet.merge_range('A2:G2', "Số 297/21, Đường Trường Chinh, Thanh Khê, Đà Nẵng", workbook.add_format({'font_size':16,'align': 'center','font':'Arial'}))
+        worksheet.merge_range('A3:G3', "SDT: 0965284848 - Website: https://ceciliaspa.vn/ ", workbook.add_format({'font_size':16,'align': 'center','font':'Arial'}))
         worksheet.merge_range('I1:K1', "ĐƠN LIỆU TRÌNH", workbook.add_format({'bold': True,'font_size':16,'align': 'center','font':'Arial'}))
 
 

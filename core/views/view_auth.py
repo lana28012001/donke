@@ -62,8 +62,6 @@ class LogoutView(View):
 @login_required(login_url='/login')
 def ChangePasswordView(request):
         if request.method == 'POST':
-            # message_error = []
-            # message_success = None
             passwordold = request.POST.get('password', '')
             passwordnew = request.POST.get('password1', '')
             passwordnewrepeat = request.POST.get('password2', '')
