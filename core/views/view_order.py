@@ -47,7 +47,7 @@ def ListOrder(request):
         dict_total_img_before = {}
         dict_total_img_after = {}
         id_user =  request.user.id
-        list_order = Order.objects.filter(user_id=id_user).order_by('-id')
+        list_order = Order.objects.all().order_by('-id')
         for i_order in list_order:
             list_data_img = FileOrder.objects.filter(img_order_id=i_order.id)
             list_img_before = []
@@ -93,17 +93,19 @@ def AddOrder(request):
             return render(request, 'order/add_order.html', context)
         else:
             id =  request.user.id
-            list_customer = Customer.objects.filter(user_id=id).all()
-            list_product = Product.objects.all()
-            list_service = Service.objects.all()
+            list_customer = Customer.objects.all()
             list_day = Day.objects.all()
             list_buoi = Buoi.objects.all()
+
+            # print(len(list_customer))
+            list_product = Product.objects.all()
+            list_service = Service.objects.all()
             context = {
                 'list_customer':list_customer,
-                'list_product':list_product,
-                'list_service':list_service,
                 'list_day':list_day,
                 'list_buoi':list_buoi,
+                'list_product':list_product,
+                'list_service':list_service,
                 
                 }
             return render(request, 'order/add_order.html', context)
@@ -372,7 +374,7 @@ def UpdateOrder(request,id):
 
         except Exception as e:
             print(e)
-            HttpResponse('Cập nhật kê thất bại!, Vui lòng kiểm tra lại')
+            HttpResponse('Cập nhật đơn kê thất bại!, Vui lòng kiểm tra lại')
 
 
 class DeleteOrderView(View):
@@ -426,6 +428,7 @@ class DeleteOrderView(View):
                     'type': 'error',
                     'message': 'Lỗi ' + str(e)
                     }, safe=True)
+   
    
 @login_required
 def ViewOrder(request,id):
@@ -579,7 +582,6 @@ def Home_Export_Excel1(request):
                                 worksheet.write_string(row_product,col_product+3, str(str_product),cell_format)
                                 worksheet.write_string(row_product,col_product+4, str(str_product_note),cell_format)
                                 row_product+=1
-    
                 
             if len(data_DetailOrderService) != 0:
                 worksheet.merge_range('H9:H10', "DỊCH VỤ", header_format)
@@ -634,11 +636,14 @@ def Home_Export_Excel1(request):
         worksheet.set_row(0, 20)
         pages_horz = 1
         pages_vert = 0
+        # điều chỉnh kích thước của trang in phù hợp với
+        # số trang ngang (pages_horz) và số trang dọc (pages_vert).
         worksheet.fit_to_pages(pages_horz,pages_vert)
         worksheet.set_margins(left=0.6,right=0.6,top=0.3,bottom=0.1)
         worksheet.set_landscape()
         workbook.close()
-        # print(settings.BASE_DIR)
+        #(settings.BASE_DIR) biến trong Django use cho đường dẫn thư mục gốc của dự án Django.
+        #strftime("%Y%m%d") định dạng thời gian thành một chuỗi 
         path_folder = str(settings.BASE_DIR) + "/core/static/Export_File/export_excel_home/" + datetime.datetime.now().strftime("%Y%m%d")
         if not os.path.exists(path_folder):
             os.makedirs(path_folder)
@@ -649,4 +654,6 @@ def Home_Export_Excel1(request):
         response_data["message"] = 'success'
         response_data["Path_File"] = '/static/Export_File/export_excel_home/' + datetime.datetime.now().strftime("%Y%m%d") + '/' + name_file
         # qs_Order.update(status_print=2)
+        
+        #json.dump(response_data) Chuyển đổi dữ liệu thành chuỗi JSON
         return HttpResponse(json.dumps(response_data), content_type="application/json")

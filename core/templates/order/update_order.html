@@ -104,7 +104,7 @@ Home
                                 class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>STT</th>
+                                        <th class="hidden-col">STT</th>
                                         <th>Ngày</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Buổi</th>
@@ -115,7 +115,7 @@ Home
                                 <tbody>
                                     {% for order_product in list_order_product %}
                                     <tr>
-                                        <td class="inputProduct"> <input type="number" class="form-control"
+                                        <td class="hidden-col"> <input type="number" class="form-control"
                                                 pattern="/^-?\d+\.?\d*$/"  autocomplete="off"
                                                 required> </td>
                                                 <input type="hidden" name="productid-{{forloop.counter}}" value="{{order_product.id}}">
@@ -414,41 +414,7 @@ Home
 <!-- <script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script> -->
 
 <script>
-    // cach dung
-    // var value_useto= document.getElementById('inputHideUseto').value;
-    // // console.log(value_useto);
-    // var list_useto = value_useto.split('<br>');
-    // if (list_useto.length > 0) {
-    //     // console.log(list_useto);
-    //     let text = "";
-    //     for (let i = 0; i < list_useto.length; i++) {
-    //         var new_text = list_useto[i].replace("<p>", "")
-    //         var text_line = new_text.replace("</p>", "")
-    //         text += text_line +"\r\n";
-    //         }
-    //     document.getElementById('inputUseto').value = text;
-    // }
-    // else {
-    //     document.getElementById('inputUseto').value = value_useto;
-    // }
-
-    // // Chi tiet lich kham
-    // var value_note= document.getElementById('inputHideNote').value;
-    // // console.log(value_useto);
-    // var list_note = value_note.split('<br>');
-    // if (list_note.length > 0) {
-    //     let text_note = "";
-    //     for (let i = 0; i < list_note.length; i++) {
-    //         var new_text = list_note[i].replace("<p>", "")
-    //         var text_line = new_text.replace("</p>", "")
-    //         text_note += text_line +"\r\n";
-    //         }
-    //     document.getElementById('inputEditNote').value = text_note;
-    // }
-    // else {
-    //     document.getElementById('inputEditNote').value = value_note;
-    // }
-    // add/delete row đơn thuoc
+    
     $('#datatableProduct').on('click', 'a[type="button"]', function () {
         $(this).closest('tr').remove();
     })

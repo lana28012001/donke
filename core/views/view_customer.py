@@ -16,14 +16,6 @@ class CustomerView(View):
             list_customer = Customer.objects.all().order_by('-id')
             list_status = TypeStatus.objects.all()
             list_type = TypeCustommer.objects.all()
-            # paginator = Paginator(customer_list, 10)
-            # page = request.GET.get('page')
-            # try:
-            #     customers = paginator.page(page)
-            # except PageNotAnInteger:
-            #     customers = paginator.page(1)
-            # except EmptyPage:
-            #     customers = paginator.page(paginator.num_pages)
 
             context = {
                 'list_customer':list_customer,
@@ -33,9 +25,12 @@ class CustomerView(View):
             return render(request, 'customer.html', context)
         else:
             data_id =  request.user.id
-            list_customer = Customer.objects.filter(user_id=data_id).all().order_by('-id')
-            list_type = TypeStatus.objects.all()
+            list_customer = Customer.objects.all().order_by('-id')
             list_status = TypeStatus.objects.all()
+            list_type = TypeCustommer.objects.all()
+            # list_customer = Customer.objects.filter(user_id=data_id).all().order_by('-id')
+            # list_type = TypeStatus.objects.all()
+            # list_status = TypeStatus.objects.all()
             context = {
                 'list_customer':list_customer,
                 'list_type':list_type,
@@ -117,6 +112,8 @@ class CustomerView(View):
         
 
 class CustomerOrderView(View):
+#Truy xuất thông tin đơn hàng của khách hàng
+#Trả về render của trang 'customer_order.html' với context chứa thông tin đơn hàng.
      def get(self, request,id):
         data_id =  request.user.id
         data_customer = get_object_or_404(Customer, pk=id)
@@ -279,5 +276,6 @@ class DeleteCustomerView(View):
                     'type': 'error',
                     'message': 'Lỗi ' + str(e)
                     }, safe=True)
-        
+# sử dụng class-based view cho việc xử lí truy xuất, 
+# hiển thị, cập nhập, xóa thông tin
 

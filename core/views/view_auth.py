@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from core.models import UserAccount
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-import re
+import re #thư viện biểu thức chính quy
 
 class LoginView(View):
     def get(self, request):
@@ -18,14 +18,7 @@ class LoginView(View):
         username = request.POST['username']
         password = request.POST['password']
         next_url = request.POST.get('next', '')
-        # try:
-        #     username = User.objects.get(email=email.lower()).username
-        # except:
-        #     context = {
-        #         'message' : 'Tài khoản email không đúng !!'
-        #     }
-        #     return render(request, 'auth/login.html', context)
-
+        
         user = authenticate(username=username, password=password)
 
         # user =  authenticate(request, username=username, password=password)
@@ -35,11 +28,6 @@ class LoginView(View):
                     'message': 'Tài khoản của bạn tạm thời đã bị khóa, vui lòng liên hệ Admin để được hỗ trợ. Xin cảm ơn!'
                 }
                 return render(request, 'auth/login.html', context)
-                # return JsonResponse(
-                #         {
-                #         'type': 'success',
-                #         'data_role':data_role,
-                #         }, safe=True)
 
             log_in(request, user)
             if next_url :
@@ -60,7 +48,11 @@ class LogoutView(View):
         return redirect('/login')
 
 @login_required(login_url='/login')
+# decorator được sử dụng để bảo vệ một view 
+# khỏi việc được truy cập bởi người dùng chưa đăng nhập.
 def ChangePasswordView(request):
+    #check dữ liệu đầu vào
+    #xác nhận mật khẩu mới khớp, đúng định dạng
         if request.method == 'POST':
             passwordold = request.POST.get('password', '')
             passwordnew = request.POST.get('password1', '')
@@ -77,17 +69,17 @@ def ChangePasswordView(request):
                                 'message':'Mật khẩu nhập lại không trùng khớp!',
                         }
                 else:
-                    # if re.fullmatch(r'[A-Za-z0-9@#$%^&+=]{8,}', passwordnew):
+                    # biểu thức chính quy để định dạng mật khẩu
                     if re.match(r'(?=.{8})(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])', passwordnew):
                         # no match
                         if (request.user.check_password(passwordold)):
-                            # request.user.update(password=make_password(pass_new))
+                            #check pass_old và pass_new
                             UserAccount.objects.filter(id=request.user.id).update(password=make_password(passwordnew))
                             # messages.success(request, 'Mật khẩu đã được thay đổi thành công')
                             context = {
                                 'message':'Mật khẩu đã được thay đổi thành công',
                             }
-                            # return redirect('/login')
+                            
                         else:
                             # messages.error(request,'Mật khẩu cũ chưa chính xác!')
                             context = {
@@ -105,7 +97,9 @@ def ChangePasswordView(request):
             #     },safe=False)
         else:
             return render(request, 'auth/change_password.html',)
-
+# django.contrib.auth xác thực mật khẩu ở model 
+# class-based view và hàm xác thực xử lý mật khẩu
+# tbao phản hồi qua context khi render template
 
 
 

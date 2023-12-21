@@ -26,8 +26,8 @@ class HomeView(View):
                 return render(request, 'home/index.html',context)
             else:
                 id =  request.user.id
-                count_customer = Customer.objects.filter(user_id=id).count()
-                count_order = Order.objects.filter(user_id=id).count()
+                count_customer = Customer.objects.all().count()
+                count_order = Order.objects.all().count()
                 context = {
                     'count_customer':count_customer,
                     'count_order':count_order,

@@ -14,13 +14,13 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
-
+#Lớp kế thừa từ ListAPIView, hiển thị list noti
 class List_Notification(ListAPIView):
     #ktra nguoi dung xac thuc chua
     permission_classes = (IsAuthenticated,)
-
     serializer_class = NotificationListViewSerializer
     filter_backends = (DjangoFilterBackend,)
+    #phương thức lọc (có điều kiện) noti của user 
     def get_queryset(self):
         queryset = Notifications.objects.filter(user=self.request.user,is_view=False).order_by('-id')
         # print(len(queryset))
@@ -28,7 +28,7 @@ class List_Notification(ListAPIView):
 
 def View_More_Notification(request):
     list_notification = Notifications.objects.filter(user_id=request.user.id).order_by('-id').all()
-    # print(len(list_notification))
+    #truyền list vào context để use trong template
     context = {
                 'list_notification':list_notification
             }
@@ -64,7 +64,9 @@ def Notification_is_view(request,id):
                     'type': 'error',
                     'message':'Không tìm thấy ID'
                     },safe=True)
+#decorator xử lí các method post và get
 @api_view(['POST','GET'])
+#API endpoint với cả method get và post
 def ManageNotification(request, pk=None):
     if request.method == 'GET':
         detailOrderProduct = DetailOrderProduct.objects.filter(any_product=False)
